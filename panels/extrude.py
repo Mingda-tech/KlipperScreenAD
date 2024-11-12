@@ -289,16 +289,24 @@ class Panel(ScreenPanel):
         temp = self._printer.get_dev_stat(self.current_extruder, "temperature")
         if temp < 190:
             script = {"script": "M104 S240"}
-            self._screen._confirm_send_action(None,
-                                              _("The nozzle temperature is too low, Are you sure you want to heat it?"),
-                                              "printer.gcode.script", script)
-        else:
-            self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
-            if direction == "-":
-                self._screen._ws.klippy.gcode_script("_FEEDSYS_RETRACT_FILAMENT")
-            else:
-                self._screen._send_action(widget, "printer.gcode.script",
-                                  {"script": f"G1 E{direction}{self.distance} F{self.speed * 60}"})
+            scroll = self._gtk.ScrolledWindow()
+            scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+            vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+            vbox.set_halign(Gtk.Align.CENTER)
+            vbox.set_valign(Gtk.Align.CENTER)
+            label = Gtk.Label(label=_("The nozzle temperature is too low, Are you sure you want to heat it?"))
+            vbox.add(label)
+            scroll.add(vbox)
+            buttons = [
+                {"name": _("Confirm"), "response": Gtk.ResponseType.OK},
+                {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            ]
+            self._gtk.Dialog(_("Heat Nozzle"), buttons, scroll, self._confirm_heat_nozzle, script)
+
+    def _confirm_heat_nozzle(self, dialog, response_id, script):
+        self._gtk.remove_dialog(dialog)
+        if response_id == Gtk.ResponseType.OK:
+            self._screen._send_action(None, "printer.gcode.script", script)
 
     def load_unload(self, widget, direction):
         if direction == "-":
