@@ -13,6 +13,8 @@ class ScreenPanel:
     _printer = None
     _gtk = None
     ks_printer_cfg = None
+    feed_filament_index = None
+    feed_filament_allinfo = []
 
     def __init__(self, screen, title, **kwargs):
         self.menu = None
@@ -161,9 +163,10 @@ class ScreenPanel:
 
     @staticmethod
     def prettify(name: str):
-        name = name.replace("_", " ")
-        if name.islower():
-            name = name.title()
+        if name is not None:
+            name = name.replace("_", " ")
+            if name.islower():
+                name = name.title()
         return name
 
     def update_temp(self, dev, temp, target, power, lines=1):

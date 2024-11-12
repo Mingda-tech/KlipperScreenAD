@@ -155,12 +155,9 @@ class Panel(ScreenPanel):
         filament_msg = self._screen.feed_filament_allinfo[int(device_index)]
         if (filament_msg['name'] is None):
             return False
-        label_text = "  %s: %s-%s %s" % (
-            filament_msg['name'] if filament_msg['name'] is not None else "?",
-            filament_msg['min_temp'] if filament_msg['min_temp'] is not None else "?",
-            filament_msg['max_temp'] if filament_msg['max_temp'] is not None else "?",
-            _("(°C)")
-        )
+        label_text = "  %s: %s-%s (°C)" % ( filament_msg['name'] if filament_msg['name'] is not None else "?",
+                                            filament_msg['min_temp'] if filament_msg['min_temp'] is not None else "?",
+                                            filament_msg['max_temp'] if filament_msg['max_temp'] is not None else "?")
         if filament_msg['color'] is not None:
             color = [int(filament_msg['color'][0:2], 16)/255, int(filament_msg['color'][2:4], 16)/255, int(filament_msg['color'][4:6], 16)/255, 0.0]
         else:
@@ -181,13 +178,14 @@ class Panel(ScreenPanel):
             return
         if device.startswith("filament"):
             image = f"filament-{device_index}" if device_index is not None else "filament-0"
+            devname = None #f"{device}"
             class_name = "graph_label_heater_bed"
             dev_type = "extrude"
         else:
             return
 
         device_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        name = self._gtk.Button(image, "", None, self.bts, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         if (device_index == "0") or (device_index in str(self.filament_index)):
