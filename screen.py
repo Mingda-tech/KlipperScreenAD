@@ -97,6 +97,9 @@ class KlipperScreen(Gtk.Window):
     windowed = False
     notification_log = []
     auto_check = True
+    feed_filament_index = None
+    feed_filament_allinfo = []
+
     def __init__(self, args):
         try:
             super().__init__(title="KlipperScreen")

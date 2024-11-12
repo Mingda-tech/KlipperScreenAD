@@ -485,9 +485,9 @@ msgid "PSK for"
 msgstr "PSK-nak"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "A csomag frissítésre kerül"
-msgstr[1] "Csomag frissül"
+
+msgstr "A csomag frissítésre kerül"
+
 
 msgid "Part Fan"
 msgstr "Tárgyhűtő"
@@ -758,17 +758,17 @@ msgid "Z offset:"
 msgstr "Z eltolás:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "ajánlás"
-msgstr[1] "ajánlások"
+
+msgstr "ajánlás"
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "óra"
-msgstr[1] "órák"
+
+msgstr "óra"
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "a 'rename_existing' használó makrók el vannak rejtve"
@@ -777,9 +777,9 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "a '_' jellel kezdődő nevű makrók el vannak rejtve"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "perc"
-msgstr[1] "percek"
+
+msgstr "perc"
+
 
 msgid "mm"
 msgstr "mm"
@@ -987,3 +987,31 @@ msgstr "Veszélyes fúvóka magasságkülönbség: "
 
 msgid "Saved successfully!"
 msgstr "Sikeresen mentve!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Szerkesztés"
+
+msgid "Filament Info"
+msgstr "Szál információ"
+
+msgid "Not found"
+msgstr "Nem található"
+
+msgid "Vendor"
+msgstr "Gyártó"
+
+msgid "Type"
+msgstr "Típus"
+
+msgid "Color"
+msgstr "Szín"
+
+msgid "Set Color"
+msgstr "Szín beállítása"
+
+msgid "Filament Settings"
+msgstr "Szál beállítások"
+
+msgid "Multi-Material Box"
+msgstr "Többanyagos doboz"

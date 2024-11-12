@@ -494,10 +494,10 @@ msgid "PSK for"
 msgstr "PSK для"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Пакет буде оновлено"
-msgstr[1] "Пакети будуть оновлені"
-msgstr[2] "Пакети будуть оновлені"
+
+msgstr "Пакет буде оновлено"
+
+
 
 msgid "Part Fan"
 msgstr "Охолодження моделі"
@@ -748,7 +748,7 @@ msgid "Up To Date"
 msgstr "Актуально"
 
 msgid "Update"
-msgstr "Оновлення"
+msgstr "О��овлення"
 
 msgid "Updating"
 msgstr "Оновлення"
@@ -778,19 +778,19 @@ msgid "Z offset:"
 msgstr "Зміщення по Z:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "коментар"
-msgstr[1] "коментарі"
-msgstr[2] "коментарі"
+
+msgstr "коментар"
+
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "година"
-msgstr[1] "годин"
-msgstr[2] "години"
+
+msgstr "година"
+
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "макроси, які використовують 'rename_existing', приховані"
@@ -799,10 +799,10 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "макроси з назвою, що починається на '_', приховані"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "хвилина"
-msgstr[1] "хвилин"
-msgstr[2] "хвилини"
+
+msgstr "хвилина"
+
+
 
 msgid "mm"
 msgstr "мм"
@@ -1085,7 +1085,7 @@ msgid "New nozzle height difference is: "
 msgstr "Нова різниця висоти сопла: "
 
 msgid "Warning: Current value is negative. This is dangerous and may damage the machine. Please recalibrate."
-msgstr "Попередження: Поточне значення негативне. Це небезпечно і може пошкодити машину. Будь ласка, виконайте повторне калібрування."
+msgstr "Попередження: Поточне значення н��гативне. Це небезпечно і може пошкодити машину. Будь ласка, виконайте повторне калібрування."
 
 msgid "Z Height Diff"
 msgstr "Різниця висоти Z"
@@ -1107,3 +1107,31 @@ msgstr "Небезпечна різниця висоти сопла: "
 
 msgid "Saved successfully!"
 msgstr "Успішно збережено!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Filament Info"
+msgstr "Інформація про філамент"
+
+msgid "Not found"
+msgstr "Не знайдено"
+
+msgid "Vendor"
+msgstr "Виробник"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Color"
+msgstr "Колір"
+
+msgid "Set Color"
+msgstr "Встановити колір"
+
+msgid "Filament Settings"
+msgstr "Налаштування філаменту"
+
+msgid "Multi-Material Box"
+msgstr "Мультиматеріальний бокс"

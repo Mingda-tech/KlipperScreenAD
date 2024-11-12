@@ -482,9 +482,9 @@ msgid "PSK for"
 msgstr ""
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] ""
-msgstr[1] ""
+
+msgstr ""
+
 
 msgid "Part Fan"
 msgstr ""
@@ -983,3 +983,31 @@ msgstr ""
 
 msgid "Saved successfully!"
 msgstr ""
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Filament Info"
+msgstr "Filament Info"
+
+msgid "Not found"
+msgstr "Not found"
+
+msgid "Vendor"
+msgstr "Vendor"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Color"
+msgstr "Color"
+
+msgid "Set Color"
+msgstr "Set Color"
+
+msgid "Filament Settings"
+msgstr "Filament Settings"
+
+msgid "Multi-Material Box"
+msgstr "Multi-Material Box"

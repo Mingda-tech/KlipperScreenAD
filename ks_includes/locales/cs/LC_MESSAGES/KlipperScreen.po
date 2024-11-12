@@ -489,10 +489,7 @@ msgid "PSK for"
 msgstr "PSK pro"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Balíček bude aktualizován"
-msgstr[1] "Balíčky budou aktualizovány"
-msgstr[2] "Balíčky budou aktualizovány"
+msgstr "Balíček bude aktualizován"
 
 msgid "Part Fan"
 msgstr "Částečný ofuk"
@@ -763,19 +760,17 @@ msgid "Z offset:"
 msgstr "Z offset:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "potvrzení"
-msgstr[1] "potvrzení"
-msgstr[2] "potvrzení"
+msgstr "potvrzení"
+
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "hodina"
-msgstr[1] "hodiny"
-msgstr[2] "hodin"
+msgstr "hodina"
+
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "makra, která používají 'rename_existing', jsou skryta"
@@ -784,10 +779,9 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "makra s názvem začínajícím na '_' jsou skrytá"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minuta"
-msgstr[1] "minuty"
-msgstr[2] "minut"
+msgstr "minuta"
+
+
 
 msgid "mm"
 msgstr "mm"
@@ -1029,3 +1023,31 @@ msgstr "Nebezpečný rozdíl výšky trysky: "
 
 msgid "Saved successfully!"
 msgstr "Úspěšně uloženo!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Filament Info"
+msgstr "Informace o filamentu"
+
+msgid "Not found"
+msgstr "Nenalezeno"
+
+msgid "Vendor"
+msgstr "Výrobce"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Color"
+msgstr "Barva"
+
+msgid "Set Color"
+msgstr "Nastavit barvu"
+
+msgid "Filament Settings"
+msgstr "Nastavení filamentu"
+
+msgid "Multi-Material Box"
+msgstr "Box pro více materiálů"

@@ -323,7 +323,7 @@ msgid "Initializing printer..."
 msgstr "Принтер стартует..."
 
 msgid "Initiate a PID calibration for:"
-msgstr "З��пустить калибровку ПИД-регулятора для:"
+msgstr "Зпустить калибровку ПИД-регулятора для:"
 
 msgid "Input Shaper"
 msgstr "Входной шейпер"
@@ -491,10 +491,10 @@ msgid "PSK for"
 msgstr "PSK для"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Пакет будет обновлен"
-msgstr[1] "Пакеты будут обновляться"
-msgstr[2] "Пакеты будут обновляться"
+
+msgstr "Пакет будет обновлен"
+
+
 
 msgid "Part Fan"
 msgstr "Вентилятор обдува детали"
@@ -765,19 +765,19 @@ msgid "Z offset:"
 msgstr "Смещение Z:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "изменение"
-msgstr[1] "изменения"
-msgstr[2] "изменений"
+
+msgstr "изменение"
+
+
 
 msgid "dBm"
 msgstr "дБм"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "час"
-msgstr[1] "часа"
-msgstr[2] "часов"
+
+msgstr "час"
+
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "макросы, использующие rename_existing, скрыты"
@@ -786,10 +786,10 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "макросы с именем, начинающиеся с '_', скрыты"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "минута"
-msgstr[1] "минуты"
-msgstr[2] "минут"
+
+msgstr "минута"
+
+
 
 msgid "mm"
 msgstr "мм"
@@ -1188,3 +1188,31 @@ msgstr "Опасная разница высоты сопла: "
 
 msgid "Saved successfully!"
 msgstr "Успешно сохранено!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Filament Info"
+msgstr "Информация о нити"
+
+msgid "Not found"
+msgstr "Не найдено"
+
+msgid "Vendor"
+msgstr "Производитель"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Color"
+msgstr "Цвет"
+
+msgid "Set Color"
+msgstr "Установить цвет"
+
+msgid "Filament Settings"
+msgstr "Настройки нити"
+
+msgid "Multi-Material Box"
+msgstr "Мульти-материальный бокс"

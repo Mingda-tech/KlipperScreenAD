@@ -488,9 +488,9 @@ msgid "PSK for"
 msgstr "PSK per"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Il pacchetto verrà aggiornato"
-msgstr[1] "I pacchetti verranno aggiornati"
+
+msgstr "Il pacchetto verrà aggiornato"
+
 
 msgid "Part Fan"
 msgstr "Part Fan"
@@ -761,17 +761,17 @@ msgid "Z offset:"
 msgstr "Z Offset:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "Applica"
-msgstr[1] "Applica"
+
+msgstr "Applica"
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "ora"
-msgstr[1] "ore"
+
+msgstr "ora"
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "macro che usano 'rename_existing' sono nascoste"
@@ -780,9 +780,9 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "macros con nome che inzia con '_' sono nascoste"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minuto"
-msgstr[1] "minuti"
+
+msgstr "minuto"
+
 
 msgid "mm"
 msgstr "mm"
@@ -1152,3 +1152,31 @@ msgstr "Differenza di altezza pericolosa dell'ugello: "
 
 msgid "Saved successfully!"
 msgstr "Salvato con successo!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Modifica"
+
+msgid "Filament Info"
+msgstr "Info Filamento"
+
+msgid "Not found"
+msgstr "Non trovato"
+
+msgid "Vendor"
+msgstr "Produttore"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Color"
+msgstr "Colore"
+
+msgid "Set Color"
+msgstr "Imposta colore"
+
+msgid "Filament Settings"
+msgstr "Impostazioni filamento"
+
+msgid "Multi-Material Box"
+msgstr "Box multi-materiale"

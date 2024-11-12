@@ -998,3 +998,31 @@ msgstr "Pavojingas purkštuko aukščio skirtumas: "
 
 msgid "Saved successfully!"
 msgstr "Succesvol opgeslagen!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Redaguoti"
+
+msgid "Filament Info"
+msgstr "Gijos informacija"
+
+msgid "Not found"
+msgstr "Nerasta"
+
+msgid "Vendor"
+msgstr "Gamintojas"
+
+msgid "Type"
+msgstr "Tipas"
+
+msgid "Color"
+msgstr "Spalva"
+
+msgid "Set Color"
+msgstr "Nustatyti spalvą"
+
+msgid "Filament Settings"
+msgstr "Gijos nustatymai"
+
+msgid "Multi-Material Box"
+msgstr "Kelių medžiagų dėžė"

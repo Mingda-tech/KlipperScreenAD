@@ -493,9 +493,9 @@ msgid "PSK for"
 msgstr "PSK pour"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Le paquet sera mis à jour"
-msgstr[1] "Les paquets seront mis à jour"
+
+msgstr "Le paquet sera mis à jour"
+
 
 msgid "Part Fan"
 msgstr "Ventilateurs de refroidissement"
@@ -767,17 +767,17 @@ msgid "Z offset:"
 msgstr "Décalage Z:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "changement"
-msgstr[1] "changements"
+
+msgstr "changement"
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "heure"
-msgstr[1] "heures"
+
+msgstr "heure"
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "les macros qui utilisent 'rename_existing' sont cachées"
@@ -786,9 +786,9 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "les macros dont le nom commence par '_' sont cachées"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minute"
-msgstr[1] "minutes"
+
+msgstr "minute"
+
 
 msgid "mm"
 msgstr "mm"
@@ -1211,3 +1211,31 @@ msgstr "Différence de hauteur dangereuse de la buse : "
 
 msgid "Saved successfully!"
 msgstr "Enregistré avec succès!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Modifier"
+
+msgid "Filament Info"
+msgstr "Info Filament"
+
+msgid "Not found"
+msgstr "Non trouvé"
+
+msgid "Vendor"
+msgstr "Fabricant"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Color"
+msgstr "Couleur"
+
+msgid "Set Color"
+msgstr "Définir la couleur"
+
+msgid "Filament Settings"
+msgstr "Paramètres du Filament"
+
+msgid "Multi-Material Box"
+msgstr "Boîte Multi-Matériaux"

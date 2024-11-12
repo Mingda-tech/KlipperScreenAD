@@ -634,11 +634,11 @@ msgid "PSK for"
 msgstr "PSK za"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Paket bo posodobljen"
-msgstr[1] "Paketa bosta posodobljena"
-msgstr[2] "Paketi bodo posodobljeni"
-msgstr[3] "Paketov bo posodobljenih"
+
+msgstr "Paket bo posodobljen"
+
+
+
 
 msgid "Part Fan"
 msgstr "Ventilator za dele"
@@ -951,28 +951,28 @@ msgid "Z offset:"
 msgstr "Z odmik:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+
+msgstr ""
+
+
+
 
 msgid "day"
-msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+
+msgstr ""
+
+
+
 
 msgid "g"
 msgstr ""
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "Ura"
-msgstr[1] "Uri"
-msgstr[2] "Ure"
-msgstr[3] "Ur"
+
+msgstr "Ura"
+
+
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "makri, ki uporabljajo 'rename_existing' so skriti"
@@ -981,11 +981,11 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "makri z imenom, ki se začne z '_', so skriti"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minuta"
-msgstr[1] "minuti"
-msgstr[2] "minute"
-msgstr[3] "minut"
+
+msgstr "minuta"
+
+
+
 
 msgid "mm"
 msgstr "mm"
@@ -1003,11 +1003,11 @@ msgid "s"
 msgstr ""
 
 msgid "second"
-msgid_plural "seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+
+msgstr ""
+
+
+
 
 #~ msgid "Mesh calibrate"
 #~ msgstr "Umeritev mreže"
@@ -1244,3 +1244,31 @@ msgstr "Nevarna razlika v višini šobe: "
 
 msgid "Saved successfully!"
 msgstr "Uspešno shranjeno!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Uredi"
+
+msgid "Filament Info"
+msgstr "Informacije o filamentu"
+
+msgid "Not found"
+msgstr "Ni najdeno"
+
+msgid "Vendor"
+msgstr "Proizvajalec"
+
+msgid "Type"
+msgstr "Tip"
+
+msgid "Color"
+msgstr "Barva"
+
+msgid "Set Color"
+msgstr "Nastavi barvo"
+
+msgid "Filament Settings"
+msgstr "Nastavitve filamenta"
+
+msgid "Multi-Material Box"
+msgstr "Večmaterialna škatla"

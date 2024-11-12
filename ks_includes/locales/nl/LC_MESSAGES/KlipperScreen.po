@@ -492,9 +492,9 @@ msgid "PSK for"
 msgstr "PSK voor"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Pakket word ge-update"
-msgstr[1] "Pakketten worden ge-update"
+
+msgstr "Pakket word ge-update"
+
 
 msgid "Part Fan"
 msgstr "Part Ventilator"
@@ -765,17 +765,17 @@ msgid "Z offset:"
 msgstr "Z offset:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "commit"
-msgstr[1] "commits"
+
+msgstr "commit"
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "uur"
-msgstr[1] "uren"
+
+msgstr "uur"
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "Macro's die 'rename_existing' gebruiken zijn verborgen"
@@ -784,9 +784,9 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "macro's die beginnen met '_' zijn verborgen"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minuut"
-msgstr[1] "minuten"
+
+msgstr "minuut"
+
 
 msgid "mm"
 msgstr "mm"
@@ -1018,3 +1018,34 @@ msgstr "Gevaarlijk hoogteverschil spuitmond: "
 
 msgid "Saved successfully!"
 msgstr "Zapisano pomyślnie!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "Filament Info"
+msgstr "Filament Info"
+
+msgid "(°C)"
+msgstr "(°C)"
+
+msgid "Not found"
+msgstr "Niet gevonden"
+
+msgid "Vendor"
+msgstr "Fabrikant"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Color"
+msgstr "Kleur"
+
+msgid "Set Color"
+msgstr "Kleur instellen"
+
+msgid "Filament Settings"
+msgstr "Filament instellingen"
+
+msgid "Multi-Material Box"
+msgstr "Multi-materiaal box"

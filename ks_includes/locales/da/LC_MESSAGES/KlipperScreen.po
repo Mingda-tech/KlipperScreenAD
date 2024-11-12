@@ -482,9 +482,9 @@ msgid "PSK for"
 msgstr "PSK for"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Pakken vil blive opdateret"
-msgstr[1] "Pakker vil blive opdateret"
+
+msgstr "Pakken vil blive opdateret"
+
 
 msgid "Part Fan"
 msgstr ""
@@ -755,17 +755,17 @@ msgid "Z offset:"
 msgstr ""
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "ændring"
-msgstr[1] "ændringer"
+
+msgstr "ændring"
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "time"
-msgstr[1] "timer"
+
+msgstr "time"
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr ""
@@ -774,9 +774,8 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr ""
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr "minut"
+
 
 msgid "mm"
 msgstr "mm"
@@ -1127,3 +1126,31 @@ msgstr "Farlig dysehøjdeforskel: "
 
 msgid "Saved successfully!"
 msgstr "Gemt med succes!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Rediger"
+
+msgid "Filament Info"
+msgstr "Filament information"
+
+msgid "Not found"
+msgstr "Ikke fundet"
+
+msgid "Vendor"
+msgstr "Producent"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Color"
+msgstr "Farve"
+
+msgid "Set Color"
+msgstr "Indstil farve"
+
+msgid "Filament Settings"
+msgstr "Filament indstillinger"
+
+msgid "Multi-Material Box"
+msgstr "Multi-materiale boks"

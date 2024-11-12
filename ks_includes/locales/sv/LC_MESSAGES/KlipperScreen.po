@@ -491,9 +491,9 @@ msgid "PSK for"
 msgstr "PSK för"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Paketet kommer att uppdateras"
-msgstr[1] "Paketen kommer att uppdateras"
+
+msgstr "Paketet kommer att uppdateras"
+
 
 msgid "Part Fan"
 msgstr "Del Fläkt"
@@ -764,17 +764,17 @@ msgid "Z offset:"
 msgstr "Z-offset:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "commit"
-msgstr[1] "commits"
+
+msgstr "commit"
+
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "timme"
-msgstr[1] "timmar"
+
+msgstr "timme"
+
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "makron som använder 'rename_existing' är dolda"
@@ -783,9 +783,9 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "makron med ett namn som börjar med '_' är dolda"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "minut"
-msgstr[1] "minuter"
+
+msgstr "minut"
+
 
 msgid "mm"
 msgstr "mm"
@@ -1070,3 +1070,31 @@ msgstr "Farlig munstyckshöjdskillnad: "
 
 msgid "Saved successfully!"
 msgstr "Sparades framgångsrikt!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Filament Info"
+msgstr "Filamentinformation"
+
+msgid "Not found"
+msgstr "Hittades inte"
+
+msgid "Vendor"
+msgstr "Tillverkare"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Color"
+msgstr "Färg"
+
+msgid "Set Color"
+msgstr "Ställ in färg"
+
+msgid "Filament Settings"
+msgstr "Filamentinställningar"
+
+msgid "Multi-Material Box"
+msgstr "Multimaterialbox"

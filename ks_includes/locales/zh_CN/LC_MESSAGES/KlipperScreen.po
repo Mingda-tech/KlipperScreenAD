@@ -503,8 +503,7 @@ msgid "PSK for"
 msgstr "PSK"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "软件包将被更新"
+msgstr "软件包将被更新"
 
 msgid "Part Fan"
 msgstr "模型风扇"
@@ -784,15 +783,13 @@ msgid "Z offset:"
 msgstr "Z轴偏移："
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "更改"
+msgstr "更改"
 
 msgid "dBm"
 msgstr "dBm"
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "小时"
+msgstr "小时"
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "使用 \"rename_existing \"的宏将被隐藏"
@@ -801,8 +798,8 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "名称以\"_\"开头的宏将被隐藏"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "分"
+
+msgstr "分"
 
 msgid "mm"
 msgstr "mm"
@@ -1171,3 +1168,33 @@ msgstr "危险的喷嘴高度差: "
 
 msgid "Saved successfully!"
 msgstr "保存成功!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Filament Info"
+msgstr "耗材信息"
+
+msgid "Not found"
+msgstr "未找到"
+
+# Feed Filament Info
+msgid "Vendor"
+msgstr "厂商"
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Color"
+msgstr "颜色"
+
+# Feed Filament Color
+msgid "Set Color"
+msgstr "设置颜色"
+
+msgid "Filament Settings"
+msgstr "耗材设置"
+
+msgid "Multi-Material Box"
+msgstr "多色耗材箱"

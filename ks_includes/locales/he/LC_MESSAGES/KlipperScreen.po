@@ -489,11 +489,7 @@ msgid "PSK for"
 msgstr "PSK עבור"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "חבילה אחת תעודכן"
-msgstr[1] "חבילות יעודכנו"
-msgstr[2] "חבילות יעודכנו"
-msgstr[3] "חבילות יעודכנו"
+msgstr "Packages will be updated"
 
 msgid "Part Fan"
 msgstr "מאוורר חומר"
@@ -764,11 +760,7 @@ msgid "Z offset:"
 msgstr "Z אוף-סט"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "שינוי"
-msgstr[1] "שינו��ים"
-msgstr[2] "שינויים"
-msgstr[3] "שינויים"
+msgstr "commits"
 
 msgid "dBm"
 msgstr "dBm"
@@ -1220,3 +1212,31 @@ msgstr "הפרש גובה נחיר מסוכן: "
 
 msgid "Saved successfully!"
 msgstr "נשמר בהצלחה!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "עריכה"
+
+msgid "Filament Info"
+msgstr "מידע על הנימה"
+
+msgid "Not found"
+msgstr "לא נמצא"
+
+msgid "Vendor"
+msgstr "יצרן"
+
+msgid "Type"
+msgstr "סוג"
+
+msgid "Color"
+msgstr "צבע"
+
+msgid "Set Color"
+msgstr "הגדר צבע"
+
+msgid "Filament Settings"
+msgstr "הגדרות נימה"
+
+msgid "Multi-Material Box"
+msgstr "תיבת חומרים מרובים"

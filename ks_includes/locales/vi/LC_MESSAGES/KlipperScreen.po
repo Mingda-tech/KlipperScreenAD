@@ -628,8 +628,8 @@ msgid "Outdated by %d"
 msgstr "Lỗi thời bởi %d"
 
 msgid "Package will be updated"
-msgid_plural "Packages will be updated"
-msgstr[0] "Gói sẽ được cập nhật"
+
+msgstr "Gói sẽ được cập nhật"
 
 msgid "Part Fan"
 msgstr "Quạt phần"
@@ -958,19 +958,19 @@ msgid "Z offset:"
 msgstr "Độ lệch Z:"
 
 msgid "commit"
-msgid_plural "commits"
-msgstr[0] "commit"
+
+msgstr "commit"
 
 msgid "day"
-msgid_plural "days"
-msgstr[0] "ngày"
+
+msgstr "ngày"
 
 msgid "g"
 msgstr ""
 
 msgid "hour"
-msgid_plural "hours"
-msgstr[0] "giờ"
+
+msgstr "giờ"
 
 msgid "macros that use 'rename_existing' are hidden"
 msgstr "các macro sử dụng 'rename_existing' đã bị ẩn"
@@ -979,8 +979,8 @@ msgid "macros with a name starting with '_' are hidden"
 msgstr "các macro có tên bắt đầu bằng '_' đã bị ẩn"
 
 msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "phút"
+
+msgstr "phút"
 
 msgid "mm"
 msgstr "mm"
@@ -998,8 +998,8 @@ msgid "s"
 msgstr ""
 
 msgid "second"
-msgid_plural "seconds"
-msgstr[0] "giây"
+
+msgstr "giây"
 
 #~ msgid "Hide temp."
 #~ msgstr "Ẩn nhiệt độ."
@@ -1228,3 +1228,31 @@ msgstr "Chênh lệch chiều cao đầu phun nguy hiểm: "
 
 msgid "Saved successfully!"
 msgstr "Đã lưu thành công!"
+
+# Feed Filament Box
+msgid "Edit"
+msgstr "Chỉnh sửa"
+
+msgid "Filament Info"
+msgstr "Thông tin dây nhựa"
+
+msgid "Not found"
+msgstr "Không tìm thấy"
+
+msgid "Vendor"
+msgstr "Nhà sản xuất"
+
+msgid "Type"
+msgstr "Loại"
+
+msgid "Color"
+msgstr "Màu sắc"
+
+msgid "Set Color"
+msgstr "Đặt màu"
+
+msgid "Filament Settings"
+msgstr "Cài đặt dây nhựa"
+
+msgid "Multi-Material Box"
+msgstr "Hộp đa vật liệu"
