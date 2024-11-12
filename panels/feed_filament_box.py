@@ -181,19 +181,16 @@ class Panel(ScreenPanel):
             return
         if device.startswith("filament"):
             image = f"filament-{device_index}" if device_index is not None else "filament-0"
-            devname = None #f"{device}"
             class_name = "graph_label_heater_bed"
             dev_type = "extrude"
-            # logging.info(f"image: {image}")
         else:
             return
 
         device_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Button(image, "", None, self.bts, Gtk.PositionType.LEFT, 1)
         name.set_alignment(0, .5)
         name.get_style_context().add_class(class_name)
         if (device_index == "0") or (device_index in str(self.filament_index)):
-            # name.connect('button-press-event', self.name_pressed, device)
             name.connect('button-release-event', self.select_filament_event, device)
             if int(self.select_filament) == int(device_index):
                 name.get_style_context().add_class("button_active")
@@ -201,11 +198,7 @@ class Panel(ScreenPanel):
                 name.get_style_context().remove_class("button_active")
         else:
             name.set_sensitive(False)
-            # self.select_filament = None
 
-        # color = self.default_color
-        # self.filament_color[device] = self.default_color
-        # self.filament_color[device] = [0,0,0,0]
         color_area = Gtk.DrawingArea(width_request=self.da_size, height_request=self.da_size)
         color_box = Gtk.Box()
         color_box.add(color_area)
