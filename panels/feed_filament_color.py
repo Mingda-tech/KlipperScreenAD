@@ -73,9 +73,9 @@ class Panel(ScreenPanel):
     def update_color_data(self, color_data):
         self.color_data = color_data
 
-    def set_color_event(self, widget, event):
-        logging.info("color_event")
-        self._screen.show_panel("feed_filament_color", _("Set Color"))
+    def set_color_event(self, widget, event, color_data):
+        self.update_color_data(color_data)
+        self.preview.queue_draw()
 
     def create_preset_color_panel(self):
         scroll = self._gtk.ScrolledWindow(steppers=False)

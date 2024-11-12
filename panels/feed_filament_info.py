@@ -137,7 +137,7 @@ class Panel(ScreenPanel):
 
     def set_color_event(self, widget, event):
         logging.info("color_event")
-        self._screen.show_panel("feed_filament_color", _("set-filament-color"))
+        self._screen.show_panel("feed_filament_color", _("Set Color"))
         return
 
     def update_filment_name_temp(self):
