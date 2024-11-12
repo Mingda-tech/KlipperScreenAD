@@ -18,8 +18,8 @@ class Panel(ScreenPanel):
         poweroff = self._gtk.Button("shutdown", _("Shutdown"), "color1")
         poweroff.connect("clicked", self.reboot_poweroff, "shutdown")
 
-        restart = self._gtk.Button("refresh", _("Restart"), "color3")
-        restart.connect("clicked", self.reboot_poweroff, "reboot")
+        restart = self._gtk.Button("refresh", _("Firmware Restart"), "color3")
+        restart.connect("clicked", self.restart_firmware)
 
         restart_ks = self._gtk.Button("refresh", _("Restart") + " Screen", "color3")
         restart_ks.connect("clicked", self._screen.restart_ks)
@@ -67,3 +67,23 @@ class Panel(ScreenPanel):
                 self._screen._ws.send_method("machine.reboot")
             else:
                 self._screen._ws.send_method("machine.shutdown")
+
+    def restart_firmware(self, widget):
+        scroll = self._gtk.ScrolledWindow()
+        scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        vbox.set_halign(Gtk.Align.CENTER)
+        vbox.set_valign(Gtk.Align.CENTER)
+        label = Gtk.Label(label=_("Are you sure you wish to restart the firmware?"))
+        vbox.add(label)
+        scroll.add(vbox)
+        buttons = [
+            {"name": _("Confirm"), "response": Gtk.ResponseType.OK},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+        ]
+        self._gtk.Dialog(_("Restart Firmware"), buttons, scroll, self.restart_firmware_confirm)
+
+    def restart_firmware_confirm(self, dialog, response_id):
+        self._gtk.remove_dialog(dialog)
+        if response_id == Gtk.ResponseType.OK:
+            self._screen._ws.send_method("printer.firmware_restart")
