@@ -872,13 +872,13 @@ class KlipperScreen(Gtk.Window):
         if self._cur_panels and hasattr(self.panels[self._cur_panels[-1]], "process_update"):
             self.panels[self._cur_panels[-1]].process_update(*args)
 
-    def _confirm_send_action(self, widget, text, method, params=None):
+    def _confirm_send_action(self, widget, text, method, params=None, save_button=True):
         buttons = [
             {"name": _("Accept"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
 
-        if params is not None and 'script' in params and params['script'].strip():
+        if save_button and params is not None and 'script' in params and params['script'].strip():
                     buttons = [
             {"name": _("Save"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
