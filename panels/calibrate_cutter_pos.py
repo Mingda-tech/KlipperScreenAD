@@ -285,6 +285,11 @@ class Panel(ScreenPanel):
 
     def save(self, widget):
         try:
+            # 打印值和类型信息进行调试
+            logging.info(f"X position: {self.pos['x']} (type: {type(self.pos['x'])})")
+            logging.info(f"Y position: {self.pos['y']} (type: {type(self.pos['y'])})")
+            logging.info(f"Z position: {self.pos['z']} (type: {type(self.pos['z'])})")
+            
             # 使用SAVE_VARIABLE命令保存位置
             save_cmd = (
                 f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}\n'
