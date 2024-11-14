@@ -37,7 +37,7 @@ class Panel(ScreenPanel):
             'z+': self._gtk.Button("z-farther", "Z+", "color3"),
             'z-': self._gtk.Button("z-closer", "Z-", "color3"),
             'start': self._gtk.Button("start", _("Start"), "color4"),
-            'save': self._gtk.Button("complete", _("Save"), "color4"),
+            'save': self._gtk.Button("complete", _("Confirm"), "color4"),
         }
         self.buttons['x+'].connect("clicked", self.move, "X", "+")
         self.buttons['x-'].connect("clicked", self.move, "X", "-")
@@ -284,61 +284,55 @@ class Panel(ScreenPanel):
         self.buttons['save'].set_sensitive(True)    
 
     def save(self, widget):
-        try:
-            logging.info(f"X position: {self.pos['x']} (type: {type(self.pos['x'])})")
-            logging.info(f"Y position: {self.pos['y']} (type: {type(self.pos['y'])})")
-            logging.info(f"Z position: {self.pos['z']} (type: {type(self.pos['z'])})")
+        buttons = [
+            {"name": _("Test Cutter"), "response": Gtk.ResponseType.APPLY},
+            {"name": _("Save & Restart"), "response": Gtk.ResponseType.OK},
+            {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+        ]
+        
+        label = _("Position saved successfully!") + "\n\n" + _("What would you like to do?")
+        
+        dialog = self._gtk.Dialog(
+            self._screen,
+            buttons,
+            label,
+            self._handle_save_action
+        )
+        dialog.set_title(_("Save Options"))
             
-            # 分别发送每个SAVE_VARIABLE命令
-            self._screen._ws.klippy.gcode_script(f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}')
-            self._screen._ws.klippy.gcode_script(f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}')
-            self._screen._ws.klippy.gcode_script(f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}')
-            
-            buttons = [
-                {"name": _("Test Cutter"), "response": "test"},
-                {"name": _("Save & Restart"), "response": "restart"},
-                {"name": _("Cancel"), "response": "cancel"}
-            ]
-            
-            label = _("Position saved successfully!") + "\n\n" + _("What would you like to do?")
-            
-            dialog = self._gtk.Dialog(
-                self._screen,
-                buttons,
-                label,
-                self._handle_save_action
-            )
-            dialog.set_title(_("Save Options"))
-
-        except Exception as e:
-            logging.error(f"Error saving variables: {e}")
-            self._screen.show_popup_message(_("Error saving position"))
-
     def _handle_save_action(self, widget, response):
-        if response == "test":
+        if response == Gtk.ResponseType.APPLY:
             # 执行切刀测试
             self._screen._send_action(
                 None,
                 "printer.gcode.script",
                 {"script": "_CUT_FILAMENT"}
             )
-        elif response == "restart":
+        elif response == Gtk.ResponseType.OK:
             # 保存并重启
-            self._screen._send_action(
-                None,
-                "printer.gcode.script",
-                {"script": "SAVE_CONFIG"}
-            )
+            self.save_config()
         
         # 关闭对话框
         if widget:
             widget.destroy()
 
-    def save_config(self):
-        script = {"script": "SAVE_CONFIG"}
-        self._screen._confirm_send_action(
-            None,
-            _("Saved successfully!") + "\n\n" + _("Need reboot, relaunch immediately?"),
-            "printer.gcode.script",
-            script
-        )                
+    def save_config(self):        
+        try:
+            # 打印值和类型信息进行调试
+            logging.info(f"X position: {self.pos['x']} (type: {type(self.pos['x'])})")
+            logging.info(f"Y position: {self.pos['y']} (type: {type(self.pos['y'])})")
+            logging.info(f"Z position: {self.pos['z']} (type: {type(self.pos['z'])})")
+            
+            # 使用SAVE_VARIABLE命令保存位置
+            save_cmd = (
+                f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}\n'
+                f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}\n'
+                f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}\n'
+                'SAVE_CONFIG'
+            )
+            
+            self._screen._ws.klippy.gcode_script(save_cmd)
+        except Exception as e:
+            logging.error(f"Error saving variables: {e}")
+            self._screen.show_popup_message(_("Error saving position"))
+                  
