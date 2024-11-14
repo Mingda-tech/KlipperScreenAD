@@ -292,7 +292,7 @@ class Panel(ScreenPanel):
         
         # 创建一个Label控件而不是直接使用字符串
         label = Gtk.Label()
-        label.set_markup(_("Position saved successfully!") + "\n\n" + _("What would you like to do?"))
+        label.set_markup(_("What would you like to do?"))
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.set_halign(Gtk.Align.CENTER)
