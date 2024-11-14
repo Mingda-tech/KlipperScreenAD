@@ -285,7 +285,7 @@ class Panel(ScreenPanel):
 
     def save(self, widget):
         buttons = [
-            {"name": _("Test Cutter"), "response": Gtk.ResponseType.APPLY},
+            {"name": _("Cut Filament"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Save & Restart"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
@@ -325,13 +325,12 @@ class Panel(ScreenPanel):
     def save_config(self):        
         try:
             # 打印值和类型信息进行调试
-            logging.info(f"X position: {self.pos['x']} (type: {type(self.pos['x'])})")
-            logging.info(f"Y position: {self.pos['y']} (type: {type(self.pos['y'])})")
-            logging.info(f"Z position: {self.pos['z']} (type: {type(self.pos['z'])})")
+            logging.info(f"X position: {self.pos['x']}")
+            logging.info(f"Y position: {self.pos['y']}")
+            logging.info(f"Z position: {self.pos['z']}")
             
             # 使用SAVE_VARIABLE命令保存位置
             save_cmd = (
-                f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}\n'
                 f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}\n'
                 f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}\n'
                 'SAVE_CONFIG'
