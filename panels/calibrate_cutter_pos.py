@@ -26,6 +26,7 @@ class Panel(ScreenPanel):
         self.pos = {}
         self.pos['x'] = 0
         self.pos['y'] = 0
+        self.pos['z'] = 0
         self.settings = {}
         self.menu = ['move_menu']
         self.buttons = {
@@ -158,6 +159,7 @@ class Panel(ScreenPanel):
                 self.labels['pos_z'].set_text(f"Z: {data['gcode_move']['gcode_position'][2]:.2f}")
                 self.pos['x'] = data['gcode_move']['gcode_position'][0]
                 self.pos['y'] = data['gcode_move']['gcode_position'][1]
+                self.pos['z'] = data['gcode_move']['gcode_position'][2]
         else:
             if "x" in homed_axes:
                 if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
@@ -174,6 +176,7 @@ class Panel(ScreenPanel):
             if "z" in homed_axes:
                 if "gcode_move" in data and "gcode_position" in data["gcode_move"]:
                     self.labels['pos_z'].set_text(f"Z: {data['gcode_move']['gcode_position'][2]:.2f}")
+                    self.pos['z'] = data['gcode_move']['gcode_position'][2]
             else:
                 self.labels['pos_z'].set_text("Z: ?")
 
@@ -225,7 +228,7 @@ class Panel(ScreenPanel):
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
             switch.set_property("width-request", round(self._gtk.font_size * 7))
             switch.set_property("height-request", round(self._gtk.font_size * 3.5))
-            box.add(switch)
+            box.add(switch) 
             dev.add(box)
         elif option['type'] == "scale":
             dev.set_orientation(Gtk.Orientation.VERTICAL)
@@ -263,12 +266,12 @@ class Panel(ScreenPanel):
         if current_extruder != "extruder":
             self._screen._ws.klippy.gcode_script("T0")
         try:
-            x_position = self._screen.klippy_config.getfloat("Variables", "switch_xpos")
-            y_position = self._screen.klippy_config.getfloat("Variables", "switch_ypos")
-            z_position = self._screen.klippy_config.getfloat("Variables", "switch_zpos")
+            x_position = self._screen.klippy_config.getfloat("Variables", "cutter_xpos")
+            y_position = self._screen.klippy_config.getfloat("Variables", "cutter_ypos")
+            z_position = self._screen.klippy_config.getfloat("Variables", "cutter_zpos")
         except:
-            self._screen.show_popup_message(_("Couldn't get the calibration switch position."))
-            logging.error("Couldn't get the calibration switch position.")
+            self._screen.show_popup_message(_("Couldn't get the calibration cutter position."))
+            logging.error("Couldn't get the calibration cutter position.")
             return
     
         logging.info(f"Moving to X:{x_position} Y:{y_position}")
@@ -281,17 +284,54 @@ class Panel(ScreenPanel):
         self.buttons['save'].set_sensitive(True)    
 
     def save(self, widget):
-            try:
-                self._screen.klippy_config.set("Variables", "switch_xpos", f"{self.pos['x']:.2f}")
-                self._screen.klippy_config.set("Variables", "switch_ypos", f"{self.pos['y']:.2f}")
+        try:
+            self._screen.klippy_config.set("Variables", "cutter_xpos", f"{self.pos['x']:.2f}")
+            self._screen.klippy_config.set("Variables", "cutter_ypos", f"{self.pos['y']:.2f}")
+            self._screen.klippy_config.set("Variables", "cutter_zpos", f"{self.pos['z']:.2f}")
 
-                with open(self._screen.klippy_config_path, 'w') as file:
-                    self._screen.klippy_config.write(file)
-                    self.save_config()                    
-                    
-            except Exception as e:
-                logging.error(f"Error writing configuration file in {self._screen.klippy_config_path}:\n{e}")
-                self._screen.show_popup_message(_("Error writing configuration"))  
+            with open(self._screen.klippy_config_path, 'w') as file:
+                self._screen.klippy_config.write(file)
+                
+                buttons = [
+                    {"name": _("Test Cutter"), "response": "test"},
+                    {"name": _("Save & Restart"), "response": "restart"},
+                    {"name": _("Cancel"), "response": "cancel"}
+                ]
+                
+                label = _("Position saved successfully!") + "\n\n" + _("What would you like to do?")
+                
+                dialog = self._gtk.Dialog(
+                    self._screen,
+                    buttons,
+                    label,
+                    self._handle_save_action
+                )
+                dialog.set_title(_("Save Options"))
+
+        except Exception as e:
+            logging.error(f"Error writing configuration file in {self._screen.klippy_config_path}:\n{e}")
+            self._screen.show_popup_message(_("Error writing configuration"))
+
+    def _handle_save_action(self, widget, response):
+        if response == "test":
+            # 执行切刀测试
+            self._screen._send_action(
+                None,
+                "printer.gcode.script",
+                {"script": "_CUT_FILAMENT"}
+            )
+        elif response == "restart":
+            # 保存并重启
+            self._screen._send_action(
+                None,
+                "printer.gcode.script",
+                {"script": "SAVE_CONFIG"}
+            )
+        # 如果是cancel，不做任何操作
+        
+        # 关闭对话框
+        if widget:
+            widget.destroy()
 
     def save_config(self):
         script = {"script": "SAVE_CONFIG"}
