@@ -285,32 +285,34 @@ class Panel(ScreenPanel):
 
     def save(self, widget):
         try:
-            self._screen.klippy_config.set("Variables", "cutter_xpos", f"{self.pos['x']:.2f}")
-            self._screen.klippy_config.set("Variables", "cutter_ypos", f"{self.pos['y']:.2f}")
-            self._screen.klippy_config.set("Variables", "cutter_zpos", f"{self.pos['z']:.2f}")
-
-            with open(self._screen.klippy_config_path, 'w') as file:
-                self._screen.klippy_config.write(file)
-                
-                buttons = [
-                    {"name": _("Test Cutter"), "response": "test"},
-                    {"name": _("Save & Restart"), "response": "restart"},
-                    {"name": _("Cancel"), "response": "cancel"}
-                ]
-                
-                label = _("Position saved successfully!") + "\n\n" + _("What would you like to do?")
-                
-                dialog = self._gtk.Dialog(
-                    self._screen,
-                    buttons,
-                    label,
-                    self._handle_save_action
-                )
-                dialog.set_title(_("Save Options"))
+            # 使用SAVE_VARIABLE命令保存位置
+            save_cmd = (
+                f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}\n'
+                f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}\n'
+                f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}'
+            )
+            
+            self._screen._ws.klippy.gcode_script(save_cmd)
+            
+            buttons = [
+                {"name": _("Test Cutter"), "response": "test"},
+                {"name": _("Save & Restart"), "response": "restart"},
+                {"name": _("Cancel"), "response": "cancel"}
+            ]
+            
+            label = _("Position saved successfully!") + "\n\n" + _("What would you like to do?")
+            
+            dialog = self._gtk.Dialog(
+                self._screen,
+                buttons,
+                label,
+                self._handle_save_action
+            )
+            dialog.set_title(_("Save Options"))
 
         except Exception as e:
-            logging.error(f"Error writing configuration file in {self._screen.klippy_config_path}:\n{e}")
-            self._screen.show_popup_message(_("Error writing configuration"))
+            logging.error(f"Error saving variables: {e}")
+            self._screen.show_popup_message(_("Error saving position"))
 
     def _handle_save_action(self, widget, response):
         if response == "test":
@@ -327,7 +329,6 @@ class Panel(ScreenPanel):
                 "printer.gcode.script",
                 {"script": "SAVE_CONFIG"}
             )
-        # 如果是cancel，不做任何操作
         
         # 关闭对话框
         if widget:
