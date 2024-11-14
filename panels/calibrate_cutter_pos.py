@@ -292,7 +292,7 @@ class Panel(ScreenPanel):
         
         # 创建一个Label控件而不是直接使用字符串
         label = Gtk.Label()
-        label.set_markup(_("What would you like to do?"))
+        label.set_markup(_("Please select how you would like to proceed."))
         label.set_line_wrap(True)
         label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         label.set_halign(Gtk.Align.CENTER)
@@ -304,7 +304,7 @@ class Panel(ScreenPanel):
             label,  # 传入Label控件
             self._handle_save_action
         )
-        dialog.set_title(_("Save Options"))
+        dialog.set_title(_("Options"))
             
     def _handle_save_action(self, widget, response):
         if response == Gtk.ResponseType.APPLY:
@@ -339,5 +339,5 @@ class Panel(ScreenPanel):
             self._screen._ws.klippy.gcode_script(save_cmd)
         except Exception as e:
             logging.error(f"Error saving variables: {e}")
-            self._screen.show_popup_message(_("Error saving position"))
+            self._screen.show_popup_message(_("Error writing configuration"))
                   

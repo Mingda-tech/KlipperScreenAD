@@ -1198,3 +1198,24 @@ msgstr "耗材设置"
 
 msgid "Multi-Material Box"
 msgstr "多色耗材箱"
+
+msgid "Are you sure you wish to restart the firmware?"
+msgstr "是否要重启固件？"
+
+msgid "Calibrate Cutter Pos"
+msgstr "切刀位置校准"
+
+msgid "Cut Filament Test"
+msgstr "切料测试"
+
+msgid "Couldn't get the calibration cutter position."
+msgstr "无法获取切刀坐标。"
+
+msgid "Save & Restart"
+msgstr "保存并重启"
+
+msgid "Please select how you would like to proceed."
+msgstr "请选择下一步操作。"
+
+msgid "Options"
+msgstr "选项"
