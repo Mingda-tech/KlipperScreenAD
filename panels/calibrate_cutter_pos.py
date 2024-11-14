@@ -285,19 +285,14 @@ class Panel(ScreenPanel):
 
     def save(self, widget):
         try:
-            # 打印值和类型信息进行调试
             logging.info(f"X position: {self.pos['x']} (type: {type(self.pos['x'])})")
             logging.info(f"Y position: {self.pos['y']} (type: {type(self.pos['y'])})")
             logging.info(f"Z position: {self.pos['z']} (type: {type(self.pos['z'])})")
             
-            # 使用SAVE_VARIABLE命令保存位置
-            save_cmd = (
-                f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}\n'
-                f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}\n'
-                f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}'
-            )
-            
-            self._screen._ws.klippy.gcode_script(save_cmd)
+            # 分别发送每个SAVE_VARIABLE命令
+            self._screen._ws.klippy.gcode_script(f'SAVE_VARIABLE VARIABLE=cutter_xpos VALUE={self.pos["x"]:.2f}')
+            self._screen._ws.klippy.gcode_script(f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}')
+            self._screen._ws.klippy.gcode_script(f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}')
             
             buttons = [
                 {"name": _("Test Cutter"), "response": "test"},
