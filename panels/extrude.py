@@ -282,9 +282,9 @@ class Panel(ScreenPanel):
         if tool_num > 0:
             self._screen._send_action(widget, "printer.gcode.script",
                                 {"script": f"T{tool_num - 1}"})
-            self.labels['unload'].set_sensitive(True)
+            self.buttons['unload'].set_sensitive(True)
         else:
-            self.labels['unload'].set_sensitive(False)
+            self.buttons['unload'].set_sensitive(False)
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")
