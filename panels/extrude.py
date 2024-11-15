@@ -96,7 +96,6 @@ class Panel(ScreenPanel):
         if i < (limit - 2) and self._printer.spoolman:
             extgrid.attach(self.buttons['spoolman'], i + 2, 0, 1, 1)
         
-        self.change_extruder(None, self.current_tool)
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
             self.labels[f"dist{i}"] = self._gtk.Button(label=i)
@@ -192,6 +191,7 @@ class Panel(ScreenPanel):
             grid.attach(speedbox, 2, 3, 2, 1)
             grid.attach(sensors, 0, 4, 4, 1)
 
+        self.change_extruder(None, self.current_tool)
         self.content.add(grid)
 
     def enable_buttons(self, enable):
@@ -264,7 +264,7 @@ class Panel(ScreenPanel):
         self.distance = distance
 
     def change_extruder(self, widget, tool_num):
-        logging.info(f"Changing extruder to T{tool_num}")
+        logging.info(f"Changing feed_system_active_tool to {tool_num}")
         
         # 更新所有按钮状态
         for t_num in self.available_tools:
