@@ -227,12 +227,15 @@ class Panel(ScreenPanel):
         if action != "notify_status_update":
             return
             
-        # 只更新温度状态，不更新按钮标签
         for x in self._printer.get_tools():
             if x in data:
-                self._printer.set_dev_stat(x, "temperature", data[x].get('temperature', 0))
-                self._printer.set_dev_stat(x, "target", data[x].get('target', 0))
-                self._printer.set_dev_stat(x, "power", data[x].get('power', 0))
+                self.update_temp(
+                    x,
+                    self._printer.get_dev_stat(x, "temperature"),
+                    self._printer.get_dev_stat(x, "target"),
+                    self._printer.get_dev_stat(x, "power"),
+                    lines=2,
+                )
 
         if ("toolhead" in data and "extruder" in data["toolhead"] and
                 data["toolhead"]["extruder"] != self.current_extruder):
