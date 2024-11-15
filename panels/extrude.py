@@ -416,18 +416,26 @@ class Panel(ScreenPanel):
                 self.current_tool = 0
                 logging.info("Multi-material box disabled")
                 self._screen._ws.klippy.gcode_script("ACTIVE_FIALMENT S=0")
+
+                # 更新按钮图标
+                self.buttons['multi_material'].set_image(
+                    self._gtk.Image(
+                        "multi_material_disable"
+                    )
+                )
+                self.change_extruder(None, self.current_tool)
         else:
             # 处理启用多色耗材箱的响应
             if response == Gtk.ResponseType.YES:
                 self.multi_material_enabled = True
                 self.current_tool = 1 if self.current_tool == 0 else self.current_tool
                 logging.info("Multi-material box enabled")
-                self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool}")
+                # self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool}")
 
-        # 更新按钮图标
-        self.buttons['multi_material'].set_image(
-            self._gtk.Image(
-                "multi_material_enabled" if self.multi_material_enabled else "multi_material_disable"
-            )
-        )
-        self.change_extruder(None, self.current_tool)
+                # 更新按钮图标
+                self.buttons['multi_material'].set_image(
+                    self._gtk.Image(
+                        "multi_material_enabled"
+                    )
+                )
+                self.change_extruder(None, self.current_tool)
