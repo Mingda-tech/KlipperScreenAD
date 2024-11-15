@@ -13,16 +13,14 @@ class Panel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.current_extruder = self._printer.get_stat("toolhead", "extruder")
-        self.multi_material_enabled = False
-        
         # 添加错误处理和默认值
         try:
-            self.current_tool = self._screen.klippy_config.getint("Variables", "feed_system_active_tool", fallback=0)
-            self.multi_material_enabled = self._screen.klippy_config.getboolean("Variables", "multi_material_enabled", fallback=True)
+            self.current_tool = self._screen.klippy_config.getint("Variables", "feed_system_active_tool", fallback=1)
         except (AttributeError, KeyError):
-            self.current_tool = 0  # 如果获取失败则默认使用T0
-            self.multi_material_enabled = True
+            self.current_tool = 1  # 如果获取失败则默认使用T0
             logging.info("Unable to get feed_system_active_tool, defaulting to T0")
+        self.multi_material_enabled = True if self.current_tool > 0 else False
+        self.previous_tool = self.current_tool
 
         # 通过检查可用命令来确定支持的工具号
         self.available_tools = []
@@ -62,7 +60,7 @@ class Panel(ScreenPanel):
             'temperature': self._gtk.Button("heat-up", _("Preheat"), "color4"),
             'spoolman': self._gtk.Button("spool", _("Filament Settings"), "color3"),
             'multi_material': self._gtk.Button(
-                "multi_material_enabled" if self.multi_material_enabled else "multi_material_disable",
+                "multi_material_enabled" if self.current_tool > 0 else "multi_material_disable",
                 _("Multi-Material Box"),
                 "color3"
             ),
@@ -81,7 +79,7 @@ class Panel(ScreenPanel):
             "params": {"current_tool": self.current_tool}
         })
         self.buttons['multi_material'].connect("clicked", self.toggle_multi_material)
-        self.buttons['spoolman'].set_sensitive(self.multi_material_enabled)
+        self.buttons['spoolman'].set_sensitive(self.multi_material_enabled > 0)
 
         extgrid = self._gtk.HomogeneousGrid()
         limit = 5
@@ -89,18 +87,16 @@ class Panel(ScreenPanel):
         for tool_num in self.available_tools:
             extruder = f"extruder{tool_num if tool_num > 0 else ''}"
             self.labels[extruder] = self._gtk.Button(f"filament-{tool_num}", f"T{tool_num}")
-            self.labels[extruder].connect("clicked", self.change_extruder, tool_num)
-            
-            if tool_num == self.current_tool:
-                self.labels[extruder].get_style_context().add_class("button_active")
-            self.labels[extruder].set_sensitive(self.multi_material_enabled)
+            self.labels[extruder].connect("clicked", self.change_extruder, tool_num + 1)
+        
             if i < limit:
                 extgrid.attach(self.labels[extruder], i, 0, 1, 1)
                 i += 1
-
+        
         if i < (limit - 2) and self._printer.spoolman:
             extgrid.attach(self.buttons['spoolman'], i + 2, 0, 1, 1)
-
+        
+        self.change_extruder(None, self.current_tool)
         distgrid = Gtk.Grid()
         for j, i in enumerate(self.distances):
             self.labels[f"dist{i}"] = self._gtk.Button(label=i)
@@ -215,7 +211,6 @@ class Panel(ScreenPanel):
                 # 使用 SAVE_VARIABLE 命令保存变量
                 save_cmd = (
                     f'SAVE_VARIABLE VARIABLE=feed_system_active_tool VALUE={self.current_tool}\n'
-                    f'SAVE_VARIABLE VARIABLE=multi_material_enabled VALUE={"True" if self.multi_material_enabled else "False"}'
                 )
                 self._screen._ws.klippy.gcode_script(save_cmd)
 
@@ -270,14 +265,23 @@ class Panel(ScreenPanel):
 
     def change_extruder(self, widget, tool_num):
         logging.info(f"Changing extruder to T{tool_num}")
-        for tool in self.available_tools:
-            extruder = f"extruder{tool if tool > 0 else ''}"
+        
+        # 更新所有按钮状态
+        for t_num in self.available_tools:
+            extruder = f"extruder{t_num if t_num > 0 else ''}"
+                # T0时禁用所有按钮
             self.labels[extruder].get_style_context().remove_class("button_active")
+            if tool_num > 0:
+                self.labels[extruder].set_sensitive(True)
+                if t_num == tool_num - 1:
+                    self.labels[extruder].get_style_context().add_class("button_active")
+            else:
+                self.labels[extruder].set_sensitive(False)
+        
         self.current_tool = tool_num
-        extruder = f"extruder{tool_num if tool_num > 0 else ''}"
-        self.labels[extruder].get_style_context().add_class("button_active")
-        self._screen._send_action(widget, "printer.gcode.script",
-                                  {"script": f"T{tool_num}"})
+        if tool_num > 0:
+            self._screen._send_action(widget, "printer.gcode.script",
+                                {"script": f"T{tool_num - 1}"})
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")
@@ -332,25 +336,19 @@ class Panel(ScreenPanel):
     def toggle_multi_material(self, widget):
         self.multi_material_enabled = not self.multi_material_enabled
         if self.multi_material_enabled:
-            self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool+1}")
+            self.current_tool = self.previous_tool
+            logging.info("Multi-material box enabled")
         else:
-            self._screen._ws.klippy.gcode_script("ACTIVE_FIALMENT S=0")
+            self.previous_tool = self.current_tool
+            self.current_tool = 0
+            logging.info("Multi-material box disabled")
+            
+        self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool}")
+
         # 更新按钮图标，移除尺寸参数
         self.buttons['multi_material'].set_image(
             self._gtk.Image(
                 "multi_material_enabled" if self.multi_material_enabled else "multi_material_disable"
             )
         )
-        
-        # 根据 multi_material_enabled 状态启用/禁用切换头按钮
-        for tool_num in self.available_tools:
-            extruder = f"extruder{tool_num if tool_num > 0 else ''}"
-            self.labels[extruder].set_sensitive(self.multi_material_enabled)
-        
-        self.buttons['spoolman'].set_sensitive(self.multi_material_enabled)
-        if self.multi_material_enabled:
-            logging.info("Multi-material box enabled")
-            # 在这里添加启用多耗材箱的逻辑
-        else:
-            logging.info("Multi-material box disabled")
-            # 在这里添加禁用多耗材箱的逻辑
+        self.change_extruder(None, self.current_tool)
