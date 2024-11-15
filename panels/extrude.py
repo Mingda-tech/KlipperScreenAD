@@ -85,7 +85,7 @@ class Panel(ScreenPanel):
         limit = 5
         i = 0
         for tool_num in self.available_tools:
-            extruder = f"extruder{tool_num if tool_num > 0 else ''}"
+            extruder = f"extruder{tool_num}"
             self.labels[extruder] = self._gtk.Button(f"filament-{tool_num}", f"T{tool_num}")
             self.labels[extruder].connect("clicked", self.change_extruder, tool_num + 1)
         
@@ -271,7 +271,7 @@ class Panel(ScreenPanel):
         
         # 更新所有按钮状态
         for t_num in self.available_tools:
-            extruder = f"extruder{t_num if t_num > 0 else ''}"
+            extruder = f"extruder{t_num}"
                 # T0时禁用所有按钮
             self.labels[extruder].get_style_context().remove_class("button_active")
             if tool_num > 0:
