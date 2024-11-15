@@ -371,7 +371,7 @@ class Panel(ScreenPanel):
                 
             # 如果没有检测到料，询问是否启用
             label = Gtk.Label()
-            label.set_markup(_("Do you want to enable multi-material?"))
+            label.set_markup(_("Do you want to enable multi-material box?"))
             label.set_line_wrap(True)
             label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
             label.set_halign(Gtk.Align.CENTER)
