@@ -282,6 +282,9 @@ class Panel(ScreenPanel):
         if tool_num > 0:
             self._screen._send_action(widget, "printer.gcode.script",
                                 {"script": f"T{tool_num - 1}"})
+            self.labels['unload'].set_sensitive(True)
+        else:
+            self.labels['unload'].set_sensitive(False)
 
     def change_speed(self, widget, speed):
         logging.info(f"### Speed {speed}")
@@ -334,18 +337,94 @@ class Panel(ScreenPanel):
             self.labels[x]['box'].get_style_context().remove_class("filament_sensor_detected")
 
     def toggle_multi_material(self, widget):
-        self.multi_material_enabled = not self.multi_material_enabled
-        if self.multi_material_enabled:
-            self.current_tool = self.previous_tool
-            logging.info("Multi-material box enabled")
-        else:
-            self.previous_tool = self.current_tool
-            self.current_tool = 0
-            logging.info("Multi-material box disabled")
+        if not self.multi_material_enabled:
+            # 检查所有料盒传感器状态
+            filament_sensors = self._printer.get_filament_sensors()
+            has_filament = False
             
-        self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool}")
+            for sensor in filament_sensors:
+                if self._printer.get_stat(sensor, "filament_detected"):
+                    has_filament = True
+                    break
+            
+            if has_filament:
+                # 如果检测到有料，显示清理提示
+                label = Gtk.Label()
+                label.set_markup(_("Filament detected! Please remove filament from the hotend before enabling multi-material box."))
+                label.set_line_wrap(True)
+                label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+                label.set_halign(Gtk.Align.CENTER)
+                label.set_valign(Gtk.Align.CENTER)
+                
+                buttons = [
+                    {"name": _("OK"), "response": Gtk.ResponseType.OK}
+                ]
+                
+                dialog = self._gtk.Dialog(
+                    self._screen,
+                    buttons,
+                    label,
+                    lambda x, y: x.destroy() if x else None
+                )
+                dialog.set_title(_("Warning"))
+                return
+                
+            # 如果没有检测到料，询问是否启用
+            label = Gtk.Label()
+            label.set_markup(_("Do you want to enable multi-material?"))
+            label.set_line_wrap(True)
+            label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            label.set_halign(Gtk.Align.CENTER)
+            label.set_valign(Gtk.Align.CENTER)
+            
+            buttons = [
+                {"name": _("Yes"), "response": Gtk.ResponseType.YES},
+                {"name": _("No"), "response": Gtk.ResponseType.NO}
+            ]
+            
+        else:
+            # 如果当前是启用状态，显示清理喉管提示
+            label = Gtk.Label()
+            label.set_markup(_("Do you want to use external filament?"))
+            label.set_line_wrap(True)
+            label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            label.set_halign(Gtk.Align.CENTER)
+            label.set_valign(Gtk.Align.CENTER)
+            
+            buttons = [
+                {"name": _("Continue"), "response": Gtk.ResponseType.OK},
+                {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
+            ]
+        
+        dialog = self._gtk.Dialog(
+            self._screen,
+            buttons,
+            label,
+            self._handle_multi_material_toggle
+        )
+        dialog.set_title(_("Multi-Material") if not self.multi_material_enabled else _("External Filament"))
 
-        # 更新按钮图标，移除尺寸参数
+    def _handle_multi_material_toggle(self, widget, response):
+        if widget:
+            widget.destroy()
+            
+        if self.multi_material_enabled:
+            # 处理禁用多色耗材箱的响应
+            if response == Gtk.ResponseType.OK:
+                self.multi_material_enabled = False
+                self.previous_tool = self.current_tool
+                self.current_tool = 0
+                logging.info("Multi-material box disabled")
+                self._screen._ws.klippy.gcode_script("ACTIVE_FIALMENT S=0")
+        else:
+            # 处理启用多色耗材箱的响应
+            if response == Gtk.ResponseType.YES:
+                self.multi_material_enabled = True
+                self.current_tool = 1 if self.current_tool == 0 else self.current_tool
+                logging.info("Multi-material box enabled")
+                self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool}")
+
+        # 更新按钮图标
         self.buttons['multi_material'].set_image(
             self._gtk.Image(
                 "multi_material_enabled" if self.multi_material_enabled else "multi_material_disable"
