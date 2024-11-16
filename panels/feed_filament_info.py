@@ -89,7 +89,7 @@ class Panel(ScreenPanel):
     def activate(self):
         logging.info(f"acti:{self._screen.feed_filament_index}")
         if self._screen.feed_filament_index is not None:
-            logging.info(f"1 ==> {self._screen.feed_filament_allinfo[self._screen.feed_filament_index]}")
+            # logging.info(f"1 ==> {self._screen.feed_filament_allinfo[self._screen.feed_filament_index]}")
             self.filament_msg = self._screen.feed_filament_allinfo[int(self._screen.feed_filament_index)]
             self.filament_vendor_option['value'] = self.filament_msg['vendor']
             self.filament_type_option['value'] = self.filament_msg['type']
@@ -97,7 +97,7 @@ class Panel(ScreenPanel):
             self.preview.queue_draw()
             self.update_option("filament_info_l", self.filament_combo_menu, "vendor", self.filament_vendor_option)
             self.set_filament_vendor(self.filament_msg['vendor'])
-            logging.info(f"2 ==> {self._screen.feed_filament_allinfo[self._screen.feed_filament_index]}")
+            # logging.info(f"2 ==> {self._screen.feed_filament_allinfo[self._screen.feed_filament_index]}")
             # self.update_filment_name_temp()
         # while len(self.menu) > 1:
         #     self.unload_menu()
@@ -211,7 +211,7 @@ class Panel(ScreenPanel):
         # self.labels['filament_info_l'].show_all()
         # self.labels['filament_info_r'].show_all()
         self.update_filment_name_temp()
-        logging.info(f"vendor_event:{vendor_str}, filament:{self.filament_msg['name']}, {self.filament_msg['min_temp']}, {self.filament_msg['max_temp']}")
+        # logging.info(f"vendor_event:{vendor_str}, filament:{self.filament_msg['name']}, {self.filament_msg['min_temp']}, {self.filament_msg['max_temp']}")
         return True
 
     def set_filament_type(self, type_str):
@@ -240,7 +240,7 @@ class Panel(ScreenPanel):
             self.filament_msg['max_temp'] = None
             self.filament_msg['name'] = None
         self.update_filment_name_temp()
-        logging.info(f"type_event:{type_str}, filament:{self.filament_msg['name']}, {self.filament_msg['min_temp']}, {self.filament_msg['max_temp']}")
+        # logging.info(f"type_event:{type_str}, filament:{self.filament_msg['name']}, {self.filament_msg['min_temp']}, {self.filament_msg['max_temp']}")
         return
 
     def set_filament_info(self):
@@ -484,24 +484,24 @@ class Panel(ScreenPanel):
         return self.right_panel
 
     def update_option(self, boxname, opt_array, opt_name, option):
-        logging.info(f"update_option:{opt_name} ==> {opt_array[opt_name]}")
+        # logging.info(f"update_option:{opt_name} ==> {opt_array[opt_name]}")
         if opt_name not in opt_array or opt_array[opt_name]['module'] is None:
-            logging.info(f"update error:{opt_array[opt_name]}")
+            # logging.info(f"update error:{opt_array[opt_name]}")
             return False
 
         dropdown = opt_array[opt_name]['module']
         dropdown.remove_all()
         for i, opt in enumerate(option['options']):
-            logging.info(f"update_option: {i}")
+            # logging.info(f"update_option: {i}")
             dropdown.append(opt['value'], opt['name'])
             # if opt['value'] == self._config.get_config()[option['section']].get(opt_name, option['value']):
             if (self.filament_msg[opt_name] is not None) and (opt['value'] == self.filament_msg[opt_name]):
-                logging.info(f"set_active0: {i}==>{opt['value']}")
+                # logging.info(f"set_active0: {i}==>{opt['value']}")
                 dropdown.set_active(i)
-                logging.info(f"set_active1: {i}==>{opt['value']}")
+                # logging.info(f"set_active1: {i}==>{opt['value']}")
         # opt_array[opt_name]
         self.labels[boxname].show_all()
-        logging.info("update_option end")
+        # logging.info("update_option end")
         return True
 
     def add_option(self, boxname, opt_array, opt_name, option):

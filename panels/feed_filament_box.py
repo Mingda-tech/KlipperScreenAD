@@ -26,7 +26,7 @@ class Panel(ScreenPanel):
                 feed_filament_info_var = "/".join(feed_filament_info_var[:4])
         except Exception as e:
             logging.error(f"Error getting feed_filament_info: {e}")
-            feed_filament_info_var = "MINGDA,PLA+,180,240,0000FF00/MINGDA,PLA,191,241,FF000000/MINGDA,PLA_CF,180,240,FF00FF00/MINGDA,PLA,191,241,FFFFFF00"
+            feed_filament_info_var = "MINGDA,PLA,191,241,FFFFFF00/MINGDA,PLA,191,241,00FF0000/MINGDA,PETG,221,261,00000000/MINGDA,PLA,191,241,00808000/MINGDA,PETG,221,261,FFFF0000"
         feed_filament_info_temp = []
         feed_filament_info_num = 0
         self.da_size = self._gtk.img_scale * 2
@@ -35,7 +35,7 @@ class Panel(ScreenPanel):
             if (0 >= len(str0)):
                 continue
             for str1 in str0.split("/"):
-                if feed_filament_info_num >= 4:
+                if feed_filament_info_num >= 5:
                     break
                 feed_filament_info_temp.append([])
                 for str2 in str1.split(","):
@@ -61,7 +61,7 @@ class Panel(ScreenPanel):
                 'color': feed_filament_info_temp[i][4] if (feed_filament_info_temp[i][4] is not None) and (feed_filament_info_temp[i][4]!="None") else None,
             })
             self.filament_name.append(f"filament_{i}")
-        self.select_filament = self._screen.feed_filament_index = 2
+        self.select_filament = self._screen.feed_filament_index = 1
         self.filament_index = 4321
         self.filament_device_info = {}
 
@@ -114,8 +114,10 @@ class Panel(ScreenPanel):
     def edit_event(self, widget, event):
         if self.select_filament is not None:
             logging.info(f"edit filament_{self.select_filament}")
+            self._screen.feed_filament_index = self.select_filament
+            filament_info = self._screen.feed_filament_allinfo[self.select_filament]
+            logging.info(f"Passing filament info: {filament_info}")
             self._screen.show_panel("feed_filament_info", _("Filament Info"))
-            # self._screen.show_panel("feed_filament_color", _("set-filament-color"))
 
     def load_event(self, widget, event):
         if self.select_filament is not None:
@@ -229,6 +231,8 @@ class Panel(ScreenPanel):
         self.left_panel.add(scroll)
 
         for d in self.filament_name:
+            if d == "filament_0":
+                continue
             self.add_device(d)
 
         return self.left_panel
