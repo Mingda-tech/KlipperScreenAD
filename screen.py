@@ -850,13 +850,20 @@ class KlipperScreen(Gtk.Window):
             self.panels['splash_screen'].check_power_status()
         elif action == "notify_gcode_response" and self.printer.state not in ["error", "shutdown"]:
             if not (data.startswith("B:") or data.startswith("T:")):
-                if data.startswith("echo: "):
-                    self.show_popup_message(data[6:], 1)
+                if "RESPOND TYPE=" in data:
+                    msg_start = data.find("MSG=")
+                    if msg_start != -1:
+                        msg = data[msg_start+5:-1] if data.endswith('"') else data[msg_start+5:]
+                        translated_msg = _(msg)
+                        level = 3 if "TYPE=error" in data else 2 if "TYPE=warning" in data else 1
+                        self.show_popup_message(translated_msg, level)
+                elif data.startswith("echo: "):
+                    self.show_popup_message(_(data[6:]), 1)
                 elif data.startswith("!! "):
-                    self.show_popup_message(data[3:], 3)
+                    self.show_popup_message(_(data[3:]), 3)
                 elif "unknown" in data.lower() and \
                         not ("TESTZ" in data or "MEASURE_AXES_NOISE" in data or "ACCELEROMETER_QUERY" in data):
-                    self.show_popup_message(data)
+                    self.show_popup_message(_(data))
                 elif "SAVE_CONFIG" in data and self.printer.state == "ready":
                     script = {"script": "SAVE_CONFIG"}
                     self._confirm_send_action(

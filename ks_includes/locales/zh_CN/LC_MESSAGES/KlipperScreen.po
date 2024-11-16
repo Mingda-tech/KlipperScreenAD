@@ -1219,3 +1219,12 @@ msgstr "请选择下一步操作。"
 
 msgid "Options"
 msgstr "选项"
+
+msgid "Filament Sensor1: No filament detected, pausing print"
+msgstr "耗材传感器1：未检测到料丝，暂停打印"
+
+msgid "Filament Sensor2: No filament detected, pausing print"
+msgstr "耗材传感器2：未检测到料丝，暂停打印"
+
+msgid "Filament Sensor: No filament detected, pausing print"
+msgstr "耗材传感器：未检测到料丝，暂停打印"
