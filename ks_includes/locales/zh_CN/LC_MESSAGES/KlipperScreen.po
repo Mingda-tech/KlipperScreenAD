@@ -1208,8 +1208,8 @@ msgstr "耗材未移除"
 msgid "remove filament"
 msgstr "移除耗材"
 
-msgid "filament runout1"
-msgstr "耗材用尽1"
+msgid "filament runout"
+msgstr "耗材用尽"
 
 msgid "filament pause reason"
 msgstr "耗材暂停原因"
@@ -1222,7 +1222,7 @@ msgstr "进料忙"
 
 msgid "Please exit the filament from the nozzle first"
 msgstr "请先从喷嘴退出耗材"
-
+ 
 msgid "motor_%s press"
 msgstr "电机%s按下"
 
@@ -1262,11 +1262,17 @@ msgstr "T%s直接进料"
 msgid "Use external filament, please manually exit"
 msgstr "使用外部耗材，请手动退出"
 
-msgid "T%s need exit filament"
-msgstr "T%s需要退出耗材"
+msgid "T0 need exit filament"
+msgstr "T0 需要退出耗材"
 
-msgid "%s:%s"
-msgstr "%s:%s"
+msgid "T1 need exit filament"
+msgstr "T1 需要退出耗材"
+
+msgid "T2 need exit filament"
+msgstr "T2 需要退出耗材"
+
+msgid "T3 need exit filament"
+msgstr "T3 需要退出耗材"
 
 msgid "Current filament indexes are:%s, active tool:%s"
 msgstr "当前耗材索引:%s，活动工具头:%s"
@@ -1551,3 +1557,9 @@ msgstr "T2直接进料"
 
 msgid "T3 direct feed"
 msgstr "T3直接进料"
+
+msgid "Copy Print"
+msgstr "复制打印"
+
+msgid "Mirror Print"
+msgstr "镜像打印"
