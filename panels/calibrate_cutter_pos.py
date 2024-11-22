@@ -285,7 +285,7 @@ class Panel(ScreenPanel):
 
     def save(self, widget):
         buttons = [
-            {"name": _("Cut Filament"), "response": Gtk.ResponseType.APPLY},
+            {"name": _("Cut Filament Test"), "response": Gtk.ResponseType.APPLY},
             {"name": _("Save & Restart"), "response": Gtk.ResponseType.OK},
             {"name": _("Cancel"), "response": Gtk.ResponseType.CANCEL}
         ]
