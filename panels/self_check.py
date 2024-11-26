@@ -209,7 +209,7 @@ class Panel(ScreenPanel):
         self._screen._ws.klippy.gcode_script("TURN_OFF_HEATERS")                           
         self._screen._ws.klippy.gcode_script("M106 S0")                           
         self._screen.show_panel("main_menu", None, remove_all=True, items=self._config.get_menu_items("__main"))
-        if self.is_poweroff_resume == 1 and self.filename != "" and self.fileposition != 0:
+        if self.is_poweroff_resume == 1:
             if self._screen._ws.connected:
                 script = {"script": "POWEROFF_RESUME"}
                 self._screen._confirm_send_action(None,
