@@ -23,13 +23,10 @@ class Panel(ScreenPanel):
         self.image_loading = os.path.join(self.themedir, "loading.gif")
         self.images = []
         self.is_poweroff_resume = 0
-        self.fileposition = 0
-        self.filename = ""
+
         self.gcodes_path = None
         if self._screen.klippy_config is not None:
             self.is_poweroff_resume = self._screen.klippy_config.getint("Variables", "resumeflag", fallback=0)
-            self.filename = self._screen.klippy_config.get("Variables", "filepath", fallback="")
-            self.fileposition = self._screen.klippy_config.getint("Variables", "fileposition", fallback=0)
 
         self.network_interfaces = netifaces.interfaces()
         self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('w')]
@@ -102,17 +99,6 @@ class Panel(ScreenPanel):
                 speed = self._printer.get_fan_speed(fan) * 100
                 if speed < self.fan_speed:
                     self._screen._ws.klippy.gcode_script(f"M106 S{self.fan_speed * 2.55:.0f}")                           
-
-        if self.is_poweroff_resume == 1 and self.filename != "" and self.fileposition != 0:
-            if "virtual_sdcard" in self._screen.printer.get_config_section_list():
-                vsd = self._screen.printer.get_config_section("virtual_sdcard")
-                if "path" in vsd:
-                    self.gcodes_path = os.path.expanduser(vsd['path'])
-            if self.gcodes_path is not None:
-                self.filename = self.filename.replace("'", "")
-                src = os.path.join(self.gcodes_path, self.filename)
-                dst = os.path.join(self.gcodes_path, "plr.gcode")                
-                GLib.idle_add(self.copy_gcode, src, dst)
 
         self.content.add(grid)        
 
@@ -220,6 +206,3 @@ class Panel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_status_update":
             self.self_test()
-            
-    def copy_gcode(self, src, dst):
-        shutil.copy2(src, dst)
