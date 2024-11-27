@@ -1563,3 +1563,6 @@ msgstr "复制打印"
 
 msgid "Mirror Print"
 msgstr "镜像打印"
+
+msgid "Filament Autofeed"
+msgstr "自动进料"

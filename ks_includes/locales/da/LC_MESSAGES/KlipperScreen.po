@@ -1408,3 +1408,6 @@ msgid "Copy Print"
 msgstr "Kopier print"
 msgid "Mirror Print"
 msgstr "Spejlvendt print"
+
+msgid "Filament Autofeed"
+msgstr "Automatisk filamentfødning"

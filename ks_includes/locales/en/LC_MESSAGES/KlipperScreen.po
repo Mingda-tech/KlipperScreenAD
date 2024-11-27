@@ -1367,3 +1367,6 @@ msgid "Copy Print"
 msgstr ""
 msgid "Mirror Print"
 msgstr ""
+
+msgid "Filament Autofeed"
+msgstr ""

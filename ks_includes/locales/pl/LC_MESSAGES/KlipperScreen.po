@@ -1404,3 +1404,6 @@ msgstr "Drukuj kopię"
 
 msgid "Mirror Print"
 msgstr "Druk lustrzany"
+
+msgid "Filament Autofeed"
+msgstr "Automatyczne podawanie filamentu"

@@ -1429,3 +1429,6 @@ msgid "Copy Print"
 msgstr "نسخ الطباعة"
 msgid "Mirror Print"
 msgstr "طباعة معكوسة"
+
+msgid "Filament Autofeed"
+msgstr "التغذية التلقائية للخيط"

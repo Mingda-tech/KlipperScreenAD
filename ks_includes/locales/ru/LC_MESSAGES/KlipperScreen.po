@@ -1573,3 +1573,6 @@ msgstr "Копировать печать"
 
 msgid "Mirror Print"
 msgstr "Зеркальная печать"
+
+msgid "Filament Autofeed"
+msgstr "Автоподача филамента"

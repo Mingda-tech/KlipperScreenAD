@@ -1372,3 +1372,6 @@ msgstr "Másolat nyomtatása"
 
 msgid "Mirror Print"
 msgstr "Tükör nyomtatás"
+
+msgid "Filament Autofeed"
+msgstr "Automatikus szálbevezetés"

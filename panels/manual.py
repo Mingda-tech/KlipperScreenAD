@@ -22,11 +22,9 @@ class Panel(ScreenPanel):
 
     def get_printer_model(self):
         # 获取打印机型号
-        if "MD_1000D" in self._printer.available_commands:
-            return "1000D"
-        elif "MD_600D" in self._printer.available_commands:
-            return "600D"
-        return "400D"  # 默认机型
+        if "MD_AD-F4" in self._printer.available_commands:
+            return "AD-F4"
+        return "AD-F4"  # 默认机型
 
     def get_manual_path(self):
         # 首先尝试获取当前语言和机型的手册路径
@@ -39,8 +37,8 @@ class Panel(ScreenPanel):
         if os.path.exists(en_model_path):
             return en_model_path
             
-        # 如果英语手册也不存在，使用默认机型(400D)的英语手册
-        return os.path.join(self.base_path, "en", "manual", "400D")
+        # 如果英语手册也不存在，使用默认机型(MD AD-F4)的英语手册
+        return os.path.join(self.base_path, "en", "manual", "AD-F4")
 
     def update_language(self, lang_code):
         """当语言改变时更新手册"""

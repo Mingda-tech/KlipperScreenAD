@@ -1402,3 +1402,6 @@ msgstr "コピー印刷"
 
 msgid "Mirror Print"
 msgstr "ミラー印刷"
+
+msgid "Filament Autofeed"
+msgstr "フィラメント自動供給"

@@ -1455,3 +1455,6 @@ msgstr "Kopiera utskrift"
 
 msgid "Mirror Print"
 msgstr "Spegelvänd utskrift"
+
+msgid "Filament Autofeed"
+msgstr "Automatisk filamentmatning"

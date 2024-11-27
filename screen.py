@@ -754,12 +754,12 @@ class KlipperScreen(Gtk.Window):
             self.show_panel("self_check", _("Self-check"), remove_all=True)
         self.auto_check = False
 
-        self.on_filament_box_power = self._config.get_main_config().getboolean("filament_box_power", fallback=False)
-        if self.on_filament_box_power and (self.printer is not None) and ('SET_FILAMENT_BOX_POWER' in self.printer.get_gcode_macros()):
-            script  = 'SET_FILAMENT_BOX_POWER S=1'
-            self._ws.klippy.gcode_script(script)        
-
-
+        self.on_feed_filament_autofill = self._config.get_main_config().getboolean("feed_filament_autofill", fallback=False)
+        if (self.printer is not None) and ('AUTOFILL_FILAMENT' in self.printer.get_gcode_macros()):
+            script  = 'AUTOFILL_FILAMENT S=0'
+            if self.on_feed_filament_autofill:
+                script  = 'AUTOFILL_FILAMENT S=1'
+            self._ws.klippy.gcode_script(script)         
     def state_startup(self):
         self.printer_initializing(_("Firmware is attempting to start"))
 
@@ -808,11 +808,11 @@ class KlipperScreen(Gtk.Window):
         if self.printer is not None:
             self.printer.change_state(self.printer.state)
 
-    def set_filament_box_power(self, is_on):
-        if 'SET_FILAMENT_BOX_POWER' in self.printer.get_gcode_macros():
-            script  = 'SET_FILAMENT_BOX_POWER S=0'
+    def set_filament_autofeed(self, is_on):
+        if 'AUTOFILL_FILAMENT' in self.printer.get_gcode_macros():
+            script  = 'AUTOFILL_FILAMENT S=0'
             if is_on:
-                script  = 'SET_FILAMENT_BOX_POWER S=1'
+                script  = 'AUTOFILL_FILAMENT S=1'
             self._ws.klippy.gcode_script(script)
 
     def _websocket_callback(self, action, data):

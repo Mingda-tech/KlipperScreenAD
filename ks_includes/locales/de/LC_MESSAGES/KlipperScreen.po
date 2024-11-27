@@ -1449,3 +1449,6 @@ msgid "Copy Print"
 msgstr "Kopieren drucken"
 msgid "Mirror Print"
 msgstr "Spiegeldruck"
+
+msgid "Filament Autofeed"
+msgstr "Automatische Filamentzuführung"

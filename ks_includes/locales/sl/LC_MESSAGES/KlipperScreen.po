@@ -1626,3 +1626,6 @@ msgstr "Kopiraj tisk"
 
 msgid "Mirror Print"
 msgstr "Zrcalni tisk"
+
+msgid "Filament Autofeed"
+msgstr "Samodejno podajanje filamenta"

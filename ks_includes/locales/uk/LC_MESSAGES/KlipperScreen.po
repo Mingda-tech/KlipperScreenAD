@@ -1492,3 +1492,6 @@ msgstr "Копіювати друк"
 
 msgid "Mirror Print"
 msgstr "Дзеркальний друк"
+
+msgid "Filament Autofeed"
+msgstr "Автоподача філаменту"

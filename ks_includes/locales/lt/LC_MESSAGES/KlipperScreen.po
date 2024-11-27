@@ -1383,3 +1383,6 @@ msgstr "Kopijuoti spausdinimą"
 
 msgid "Mirror Print"
 msgstr "Veidrodinis spausdinimas"
+
+msgid "Filament Autofeed"
+msgstr "Automatinis gijos tiekimas"

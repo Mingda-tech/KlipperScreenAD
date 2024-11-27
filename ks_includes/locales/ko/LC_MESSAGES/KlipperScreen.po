@@ -1468,3 +1468,6 @@ msgstr "복사 인쇄"
 
 msgid "Mirror Print"
 msgstr "미러 인쇄"
+
+msgid "Filament Autofeed"
+msgstr "필라멘트 자동 공급"

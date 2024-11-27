@@ -1305,3 +1305,6 @@ msgid "Copy Print"
 msgstr "Kopírovat tisk"
 msgid "Mirror Print"
 msgstr "Zrcadlový tisk"
+
+msgid "Filament Autofeed"
+msgstr "Automatické podávání filamentu"

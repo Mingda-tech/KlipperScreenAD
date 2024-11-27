@@ -28,7 +28,7 @@ class Panel(ScreenPanel):
         self.labels['settings_menu'].add(self.labels['settings'])
         for option in options:
             name = list(option)[0]
-            if name == "filament_box_power" and "SET_FILAMENT_BOX_POWER" not in self._printer.get_gcode_macros():
+            if name == "feed_filament_autofill" and "AUTOFILL_FILAMENT" not in self._printer.get_gcode_macros():
                 continue
 
             script_file = "/home/mingda/printer_data/script/print_end.sh"
