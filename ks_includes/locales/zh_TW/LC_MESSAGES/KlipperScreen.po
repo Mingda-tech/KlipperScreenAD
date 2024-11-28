@@ -922,8 +922,8 @@ msgstr "繼續"
 #~ msgid "Number Pad"
 #~ msgstr "数字键盘"
 
-#~ msgid "Preheat"
-#~ msgstr "预热"
+msgid "Preheat"
+msgstr "预热"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "屏幕将在1秒内显示"

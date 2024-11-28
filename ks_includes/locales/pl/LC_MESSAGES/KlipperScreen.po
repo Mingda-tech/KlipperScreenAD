@@ -1407,3 +1407,6 @@ msgstr "Druk lustrzany"
 
 msgid "Filament Autofeed"
 msgstr "Automatyczne podawanie filamentu"
+
+msgid "Preheat"
+msgstr "Podgrzanie"

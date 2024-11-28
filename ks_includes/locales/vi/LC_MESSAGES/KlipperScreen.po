@@ -1613,3 +1613,6 @@ msgstr "In gương"
 
 msgid "Filament Autofeed"
 msgstr "Tự động nạp sợi nhựa"
+
+msgid "Preheat"
+msgstr "Nung nóng"

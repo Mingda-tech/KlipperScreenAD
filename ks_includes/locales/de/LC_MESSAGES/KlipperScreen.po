@@ -952,8 +952,8 @@ msgstr "Fortsetzen"
 #~ msgid "Number Pad"
 #~ msgstr "Tastenfeld"
 
-#~ msgid "Preheat"
-#~ msgstr "Vorheizen"
+msgid "Preheat"
+msgstr "Vorheizen"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "Der Bildschirm wird in weniger als einer Sekunde angezeigt"

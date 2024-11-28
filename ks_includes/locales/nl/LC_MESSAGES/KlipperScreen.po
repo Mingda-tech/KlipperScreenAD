@@ -1409,3 +1409,6 @@ msgstr "Spiegel afdruk"
 
 msgid "Filament Autofeed"
 msgstr "Automatische filamenttoevoer"
+
+msgid "Preheat"
+msgstr "Voorverwarmen"

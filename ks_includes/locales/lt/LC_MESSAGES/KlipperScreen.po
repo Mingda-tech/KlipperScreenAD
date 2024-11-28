@@ -1386,3 +1386,6 @@ msgstr "Veidrodinis spausdinimas"
 
 msgid "Filament Autofeed"
 msgstr "Automatinis gijos tiekimas"
+
+msgid "Preheat"
+msgstr "Priekišilumos"

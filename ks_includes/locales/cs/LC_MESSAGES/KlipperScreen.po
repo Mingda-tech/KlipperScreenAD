@@ -1308,3 +1308,6 @@ msgstr "Zrcadlový tisk"
 
 msgid "Filament Autofeed"
 msgstr "Automatické podávání filamentu"
+
+msgid "Preheat"
+msgstr "Předehřátí"

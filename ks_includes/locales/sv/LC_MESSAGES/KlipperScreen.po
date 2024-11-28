@@ -1458,3 +1458,6 @@ msgstr "Spegelvänd utskrift"
 
 msgid "Filament Autofeed"
 msgstr "Automatisk filamentmatning"
+
+msgid "Preheat"
+msgstr "Förvarma"

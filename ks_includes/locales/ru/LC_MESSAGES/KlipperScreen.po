@@ -952,8 +952,8 @@ msgstr "Продолжить"
 #~ msgid "Number Pad"
 #~ msgstr "Клавиатура"
 
-#~ msgid "Preheat"
-#~ msgstr "Преднагрев"
+msgid "Preheat"
+msgstr "Преднагрев"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "Экран отобразится через одну секунду"

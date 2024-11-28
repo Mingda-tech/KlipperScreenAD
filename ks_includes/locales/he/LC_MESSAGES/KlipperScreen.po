@@ -955,8 +955,8 @@ msgstr "המשך"
 #~ msgid "Number Pad"
 #~ msgstr "פד נומרי"
 
-#~ msgid "Preheat"
-#~ msgstr "חימום מראש"
+msgid "Preheat"
+msgstr "חימום מראש"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "המסך יופיע תוך פחות משנייה אחת"

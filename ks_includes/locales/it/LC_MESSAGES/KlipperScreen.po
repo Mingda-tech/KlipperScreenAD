@@ -940,8 +940,8 @@ msgstr "Continua"
 #~ msgid "Number Pad"
 #~ msgstr "Tastierino"
 
-#~ msgid "Preheat"
-#~ msgstr "Preriscalda"
+msgid "Preheat"
+msgstr "Preriscalda"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "Lo schermo verrà visualizzato a breve"

@@ -1471,3 +1471,6 @@ msgstr "미러 인쇄"
 
 msgid "Filament Autofeed"
 msgstr "필라멘트 자동 공급"
+
+msgid "Preheat"
+msgstr "예열"

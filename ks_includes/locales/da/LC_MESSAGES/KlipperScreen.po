@@ -1411,3 +1411,6 @@ msgstr "Spejlvendt print"
 
 msgid "Filament Autofeed"
 msgstr "Automatisk filamentfødning"
+
+msgid "Preheat"
+msgstr "Forvarmning"

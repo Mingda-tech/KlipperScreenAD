@@ -1487,3 +1487,6 @@ msgstr "Ayna Baskı"
 
 msgid "Filament Autofeed"
 msgstr "Otomatik Filament Besleme"
+
+msgid "Preheat"
+msgstr "Ön Isıtma"

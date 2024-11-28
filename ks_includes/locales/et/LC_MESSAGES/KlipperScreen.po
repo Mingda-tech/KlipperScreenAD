@@ -1553,3 +1553,6 @@ msgstr "Peegelprintimine"
 
 msgid "Filament Autofeed"
 msgstr "Automaatne filamendi etteanne"
+
+msgid "Preheat"
+msgstr "Eelsoojendamine"

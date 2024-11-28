@@ -1495,3 +1495,6 @@ msgstr "Дзеркальний друк"
 
 msgid "Filament Autofeed"
 msgstr "Автоподача філаменту"
+
+msgid "Preheat"
+msgstr "Передігрів"

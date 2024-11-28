@@ -1375,3 +1375,6 @@ msgstr "Tükör nyomtatás"
 
 msgid "Filament Autofeed"
 msgstr "Automatikus szálbevezetés"
+
+msgid "Preheat"
+msgstr "Előmelegítés"

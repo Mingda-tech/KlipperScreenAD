@@ -1618,3 +1618,6 @@ msgstr "Impressão espelho"
 
 msgid "Filament Autofeed"
 msgstr "Alimentação automática de filamento"
+
+msgid "Preheat"
+msgstr "Pré-aquecimento"

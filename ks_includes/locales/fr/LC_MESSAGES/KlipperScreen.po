@@ -948,8 +948,8 @@ msgstr "Continuer"
 #~ msgid "Number Pad"
 #~ msgstr "Clavier"
 
-#~ msgid "Preheat"
-#~ msgstr "Préchauffer"
+msgid "Preheat"
+msgstr "Préchauffer"
 
 #~ msgid "Screen will show in less than one second"
 #~ msgstr "L'écran s'affichera en moins d'une seconde"

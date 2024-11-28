@@ -1432,3 +1432,6 @@ msgstr "طباعة معكوسة"
 
 msgid "Filament Autofeed"
 msgstr "التغذية التلقائية للخيط"
+
+msgid "Preheat"
+msgstr "التسخين المسبق"
