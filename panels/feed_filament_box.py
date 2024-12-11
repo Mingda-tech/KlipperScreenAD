@@ -179,7 +179,7 @@ class Panel(ScreenPanel):
             logging.info(_("Not found") + f" {device}")
             return
         if device.startswith("filament"):
-            image = f"filament-{device_index}" if device_index is not None else "filament-0"
+            image = f"filament-{int(device_index)-1}" if device_index is not None else "filament-0"
             devname = None #f"{device}"
             class_name = "graph_label_heater_bed"
             dev_type = "extrude"

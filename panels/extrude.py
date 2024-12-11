@@ -191,7 +191,17 @@ class Panel(ScreenPanel):
             grid.attach(speedbox, 2, 3, 2, 1)
             grid.attach(sensors, 0, 4, 4, 1)
 
-        self.change_extruder(None, self.current_tool)
+                # 更新所有按钮状态
+        for t_num in self.available_tools:
+            extruder = f"extruder{t_num}"
+                # T0时禁用所有按钮
+            self.labels[extruder].get_style_context().remove_class("button_active")
+            if self.current_tool > 0:
+                self.labels[extruder].set_sensitive(True)
+                if t_num == self.current_tool - 1:
+                    self.labels[extruder].get_style_context().add_class("button_active")
+            else:
+                self.labels[extruder].set_sensitive(False)
         self.content.add(grid)
 
     def enable_buttons(self, enable):

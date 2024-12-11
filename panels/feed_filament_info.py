@@ -9,26 +9,26 @@ from ks_includes.screen_panel import ScreenPanel
 
 class Panel(ScreenPanel):
     filament_list = {
-        'Generic PLA': ["190","240"],
+        'Generic PLA': ["190","220"],
         'Generic PETG': ["220","260"],
-        'Generic ABS': ["240","280"],
-        'Generic PET': ["260","320"],
-        'MINGDA PLA': ["190","240"],
+        'Generic PDS': ["190","220"],
+        'Generic PET': ["260","300"],
+        'MINGDA PLA': ["190","220"],
         'MINGDA PETG': ["220","260"],
-        'MINGDA ABS': ["240","280"],
-        'MINGDA PET': ["260","320"],
+        'MINGDA PDS': ["190","220"],
+        'MINGDA PET': ["260","300"],
     }
     known_filament_info_list = {
         'Generic': {
-            'PLA': ["190","240"],
-            'ABS': ["240","280"],
-            'PET': ["260","320"],
-            'PET-CF': ["265","325"],
+            'PLA': ["190","220"],
+            'PDS': ["190","220"],
+            'PET': ["260","300"],
+            'PET-CF': ["265","305"],
         },
         'MINGDA': {
-            'PLA': ["191","241"],
-            'ABS': ["241","281"],
-            'PET': ["261","321"],
+            'PLA': ["191","221"],
+            'PDS': ["191","221"],
+            'PET': ["261","301"],
             'PETG': ["221","261"],
         },
     }
