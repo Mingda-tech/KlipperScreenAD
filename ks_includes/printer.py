@@ -115,6 +115,14 @@ class Printer:
     def process_update(self, data):
         if self.data is None:
             return
+        
+        if 'save_variables' in data:
+            logging.debug(f"Printer processing save_variables: {data['save_variables']}")
+            if 'variables' in data['save_variables']:
+                logging.debug(f"Variables content: {data['save_variables']['variables']}")
+                if 'feed_system_active_tool' in data['save_variables']['variables']:
+                    logging.info(f"feed_system_active_tool value: {data['save_variables']['variables']['feed_system_active_tool']}")
+
         for x in (self.get_temp_devices() + self.get_filament_sensors()):
             if x in data:
                 for i in data[x]:

@@ -228,12 +228,6 @@ class Panel(ScreenPanel):
             logging.error(f"Error saving variables: {e}")
 
     def process_update(self, action, data):
-        if action == "notify_gcode_response":
-            if "action:cancel" in data or "action:paused" in data:
-                self.enable_buttons(True)
-            elif "action:resumed" in data:
-                self.enable_buttons(False)
-            return
         if action != "notify_status_update":
             return
             
@@ -247,12 +241,42 @@ class Panel(ScreenPanel):
                     lines=2,
                 )
 
-        if ("toolhead" in data and "extruder" in data["toolhead"] and
-                data["toolhead"]["extruder"] != self.current_extruder):
-            for extruder in self._printer.get_tools():
-                self.labels[extruder].get_style_context().remove_class("button_active")
-            self.current_extruder = data["toolhead"]["extruder"]
-            self.labels[self.current_extruder].get_style_context().add_class("button_active")
+        # 检查并更新当前料管
+        try:
+            if 'save_variables' in data:
+                logging.info(f"Extrude panel received save_variables: {data['save_variables']}")
+                if 'variables' in data['save_variables']:
+                    logging.info(f"Variables content: {data['save_variables']['variables']}")
+                    active_tool = data['save_variables']['variables'].get('feed_system_active_tool')
+                    if active_tool is not None and active_tool != self.current_tool:
+                        logging.info(f"Current tool: {self.current_tool}, New tool: {active_tool}")
+                        
+                        # 更新按钮状态
+                        for t_num in self.available_tools:
+                            extruder = f"extruder{t_num}"
+                            self.labels[extruder].get_style_context().remove_class("button_active")
+                            if active_tool > 0:
+                                self.labels[extruder].set_sensitive(True)
+                                if t_num == active_tool - 1:
+                                    self.labels[extruder].get_style_context().add_class("button_active")
+                                    logging.info(f"Setting {extruder} as active")
+                            else:
+                                self.labels[extruder].set_sensitive(False)
+                        
+                        # 更新当前工具号
+                        self.current_tool = active_tool
+                        
+                        # 更新多材料盒状态
+                        self.multi_material_enabled = active_tool > 0
+                        self.buttons['multi_material'].set_image(
+                            self._gtk.Image(
+                                "multi_material_enabled" if self.multi_material_enabled else "multi_material_disable"
+                            )
+                        )
+                        self.buttons['spoolman'].set_sensitive(self.multi_material_enabled)
+                        
+        except Exception as e:
+            logging.exception(f"Error updating active feed system: {e}")
 
         for x in self._printer.get_filament_sensors():
             if x in data:

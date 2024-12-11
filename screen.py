@@ -288,6 +288,7 @@ class KlipperScreen(Gtk.Window):
                 "motion_report": ["live_position", "live_velocity", "live_extruder_velocity"],
                 "exclude_object": ["current_object", "objects", "excluded_objects"],
                 "manual_probe": ['is_active'],
+                "save_variables": ["variables"],
             }
         }
         for extruder in self.printer.get_tools():
@@ -905,6 +906,13 @@ class KlipperScreen(Gtk.Window):
                         "printer.gcode.script",
                         script
                     )
+        elif action == "notify_status_update":
+            if "save_variables" in data:
+                logging.info(f"Received save_variables update: {data['save_variables']}")
+                if "variables" in data["save_variables"]:
+                    logging.info(f"Variables content: {data['save_variables']['variables']}")
+                    if "feed_system_active_tool" in data["save_variables"]["variables"]:
+                        logging.info(f"feed_system_active_tool updated to: {data['save_variables']['variables']['feed_system_active_tool']}")
         self.process_update(action, data)
 
     def process_update(self, *args):
