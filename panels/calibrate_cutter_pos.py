@@ -329,8 +329,10 @@ class Panel(ScreenPanel):
             logging.info(f"Y position: {self.pos['y']}")
             logging.info(f"Z position: {self.pos['z']}")
             
-            # 使用SAVE_VARIABLE命令保存位置
             save_cmd = (
+                "G91\n"                    # 设置相对坐标
+                "G1 X-20 F3000\n"         # X轴左移20mm
+                "G90\n"                    # 恢复绝对坐标
                 f'SAVE_VARIABLE VARIABLE=cutter_ypos VALUE={self.pos["y"]:.2f}\n'
                 f'SAVE_VARIABLE VARIABLE=cutter_zpos VALUE={self.pos["z"]:.2f}\n'
                 'SAVE_CONFIG'
