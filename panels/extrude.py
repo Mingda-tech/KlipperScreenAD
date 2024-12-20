@@ -371,38 +371,6 @@ class Panel(ScreenPanel):
 
     def toggle_multi_material(self, widget):
         if not self.multi_material_enabled:
-            # 检查所有料盒传感器状态
-            filament_sensors = self._printer.get_filament_sensors()
-            has_filament = False
-            
-            for sensor in filament_sensors:
-                if self._printer.get_stat(sensor, "filament_detected"):
-                    has_filament = True
-                    break
-            
-            if has_filament:
-                # 如果检测到有料，显示清理提示
-                label = Gtk.Label()
-                label.set_markup(_("Filament detected! Please remove filament from the hotend before enabling multi-material box."))
-                label.set_line_wrap(True)
-                label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-                label.set_halign(Gtk.Align.CENTER)
-                label.set_valign(Gtk.Align.CENTER)
-                
-                buttons = [
-                    {"name": _("OK"), "response": Gtk.ResponseType.OK}
-                ]
-                
-                dialog = self._gtk.Dialog(
-                    self._screen,
-                    buttons,
-                    label,
-                    lambda x, y: x.destroy() if x else None
-                )
-                dialog.set_title(_("Warning"))
-                return
-                
-            # 如果没有检测到料，询问是否启用
             label = Gtk.Label()
             label.set_markup(_("Do you want to enable multi-material box?"))
             label.set_line_wrap(True)
