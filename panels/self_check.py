@@ -42,7 +42,7 @@ class Panel(ScreenPanel):
                 from ks_includes.wifi import WifiManager
             self.wifi = WifiManager(self.wireless_interfaces[0])
 
-        self.test_items = ["Nozzle Heating", "Nozzle Cooling Fan", "Hotend Cooling Fan", "Filament Detection", "Auto Leveling", "Camera", "WiFi"]
+        self.test_items = ["Nozzle Heating", "Nozzle Cooling Fan", "Hotend Cooling Fan", "Auto Leveling", "Camera", "WiFi"]
         self.steps = [x for x in range(len(self.test_items))]
 
         grid = self._gtk.HomogeneousGrid()
@@ -111,14 +111,14 @@ class Panel(ScreenPanel):
     def self_test(self):        
         for step in self.steps:
             is_ok = False
-            if step == 0:
+            if step == 0:  # Nozzle Heating
                 for extruder in self._printer.get_tools():
                     is_ok = True
                     temp = self._printer.get_dev_stat(extruder, "temperature")
                     if temp < self.tool_target:
                         is_ok = False
                         break
-            elif step == 1:
+            elif step == 1:  # Nozzle Cooling Fan
                 for fan in self.fans:
                     is_ok = True
                     if fan == "fan":
@@ -126,7 +126,7 @@ class Panel(ScreenPanel):
                         if speed < self.fan_speed-5:
                             is_ok = False
                             break
-            elif step == 2:
+            elif step == 2:  # Hotend Cooling Fan
                 for fan in self.fans:
                     is_ok = True
                     if 'hotend' in fan.lower():
@@ -134,30 +134,19 @@ class Panel(ScreenPanel):
                         if speed < self.fan_speed-5:
                             is_ok = False
                             break
-            elif step == 3:
-                filament_sensors = self._printer.get_filament_sensors()
-                for fs in filament_sensors:
-                    is_ok = True
-                    if self._printer.get_stat(fs, "enabled") :
-                        if not self._printer.get_stat(fs, "filament_detected"):
-                            is_ok = False
-                            break
-                    else:
-                        is_ok = False
-                        break
-            elif step == 4:
+            elif step == 3:  # Auto Leveling
                 is_ok = False
                 bm = self._printer.get_stat("bed_mesh")
                 if bm is not None and self._printer.get_stat("bed_mesh", "profile_name") != '':
                     is_ok = True
                                             
-            elif step == 5:
+            elif step == 4:  # Camera
                 for i, cam in enumerate(self._printer.cameras):
                     is_ok = os.path.exists(f"/dev/video{2*i}")
                     if not cam["enabled"]:
                         is_ok = False
                         break
-            elif step == 6:
+            elif step == 5:  # WiFi
                 is_ok = False
                 connected_ssid = self.wifi.get_connected_ssid()
                 if connected_ssid is not None:
