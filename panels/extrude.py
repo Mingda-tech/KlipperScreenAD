@@ -80,6 +80,16 @@ class Panel(ScreenPanel):
         })
         self.buttons['multi_material'].connect("clicked", self.toggle_multi_material)
         self.buttons['spoolman'].set_sensitive(self.multi_material_enabled > 0)
+        
+        # 为横屏模式下的multi_material按钮设置最大宽度，确保文本省略号正常工作
+        if not self._screen.vertical_mode:
+            from ks_includes.KlippyGtk import find_widget
+            label = find_widget(self.buttons['multi_material'], Gtk.Label)
+            if label:
+                # 根据文本长度动态设置，中文等短文本不限制，长文本限制为12字符
+                text = label.get_text()
+                if len(text) > 20:  # 对于超过20字符的长文本
+                    label.set_max_width_chars(12)  # 设置最大字符数，超过会显示省略号
 
         extgrid = self._gtk.HomogeneousGrid()
         limit = 5

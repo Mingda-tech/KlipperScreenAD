@@ -12,24 +12,20 @@ class Panel(ScreenPanel):
         'Generic PLA': ["190","220"],
         'Generic PETG': ["220","260"],
         'Generic PDS': ["190","220"],
-        'Generic PET': ["260","300"],
         'MINGDA PLA': ["190","220"],
-        'MINGDA PETG': ["220","260"],
+        'MINGDA PETG': ["220","250"],
         'MINGDA PDS': ["190","220"],
-        'MINGDA PET': ["260","300"],
     }
     known_filament_info_list = {
         'Generic': {
             'PLA': ["190","220"],
             'PDS': ["190","220"],
-            'PET': ["260","300"],
-            'PET-CF': ["265","305"],
+            'PETG': ["220","250"],
         },
         'MINGDA': {
-            'PLA': ["180","220"],
-            'PDS': ["180","220"],
-            'PET': ["260","300"],
-            'PETG': ["220","260"],
+            'PLA': ["190","220"],
+            'PDS': ["190","220"],
+            'PETG': ["220","250"],
         },
     }
     def __init__(self, screen, title):
