@@ -81,15 +81,8 @@ class Panel(ScreenPanel):
         self.buttons['multi_material'].connect("clicked", self.toggle_multi_material)
         self.buttons['spoolman'].set_sensitive(self.multi_material_enabled > 0)
         
-        # 为横屏模式下的multi_material按钮设置最大宽度，确保文本省略号正常工作
-        if not self._screen.vertical_mode:
-            from ks_includes.KlippyGtk import find_widget
-            label = find_widget(self.buttons['multi_material'], Gtk.Label)
-            if label:
-                # 根据文本长度动态设置，中文等短文本不限制，长文本限制为12字符
-                text = label.get_text()
-                if len(text) > 20:  # 对于超过20字符的长文本
-                    label.set_max_width_chars(12)  # 设置最大字符数，超过会显示省略号
+        # 初始化时设置多材料按钮的文本限制
+        self._apply_multi_material_text_limit()
 
         extgrid = self._gtk.HomogeneousGrid()
         limit = 5
@@ -214,6 +207,28 @@ class Panel(ScreenPanel):
                 self.labels[extruder].set_sensitive(False)
         self.content.add(grid)
 
+    def _apply_multi_material_text_limit(self):
+        """为横屏模式下的multi_material按钮设置文本限制"""
+        if not self._screen.vertical_mode and 'multi_material' in self.buttons:
+            from ks_includes.KlippyGtk import find_widget
+            label = find_widget(self.buttons['multi_material'], Gtk.Label)
+            if label:
+                # 对所有语言统一限制为12字符，确保界面一致性
+                label.set_max_width_chars(12)
+                label.set_ellipsize(Pango.EllipsizeMode.END)
+    
+    def _update_multi_material_icon(self, enabled):
+        """更新多材料按钮的图标，不破坏按钮结构"""
+        from ks_includes.KlippyGtk import find_widget
+        image = find_widget(self.buttons['multi_material'], Gtk.Image)
+        if image:
+            icon_name = "multi_material_enabled" if enabled else "multi_material_disable"
+            # 直接更新图片的pixbuf，而不是替换整个图片对象
+            new_pixbuf = self._gtk.Image(icon_name, self._gtk.img_scale * self._gtk.button_image_scale, 
+                                         self._gtk.img_scale * self._gtk.button_image_scale).get_pixbuf()
+            if new_pixbuf:
+                image.set_from_pixbuf(new_pixbuf)
+
     def enable_buttons(self, enable):
         for button in self.buttons:
             if button in ("temperature", "spoolman"):
@@ -278,11 +293,8 @@ class Panel(ScreenPanel):
                         
                         # 更新多材料盒状态
                         self.multi_material_enabled = active_tool > 0
-                        self.buttons['multi_material'].set_image(
-                            self._gtk.Image(
-                                "multi_material_enabled" if self.multi_material_enabled else "multi_material_disable"
-                            )
-                        )
+                        # 使用新方法更新图标
+                        self._update_multi_material_icon(self.multi_material_enabled)
                         self.buttons['spoolman'].set_sensitive(self.multi_material_enabled)
                         
         except Exception as e:
@@ -429,11 +441,8 @@ class Panel(ScreenPanel):
                 self._screen._ws.klippy.gcode_script("ACTIVE_FIALMENT S=0")
 
                 # 更新按钮图标
-                self.buttons['multi_material'].set_image(
-                    self._gtk.Image(
-                        "multi_material_disable"
-                    )
-                )
+                # 使用新方法更新图标
+                self._update_multi_material_icon(False)
                 self.change_extruder(None, self.current_tool)
         else:
             # 处理启用多色耗材箱的响应
@@ -444,9 +453,6 @@ class Panel(ScreenPanel):
                 # self._screen._ws.klippy.gcode_script(f"ACTIVE_FIALMENT S={self.current_tool}")
 
                 # 更新按钮图标
-                self.buttons['multi_material'].set_image(
-                    self._gtk.Image(
-                        "multi_material_enabled"
-                    )
-                )
+                # 使用新方法更新图标
+                self._update_multi_material_icon(True)
                 self.change_extruder(None, self.current_tool)
