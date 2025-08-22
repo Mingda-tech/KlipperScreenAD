@@ -256,10 +256,16 @@ class KlippyGtk:
     def remove_dialog(self, dialog, *args):
         if self.screen.updating:
             return
-        dialog.destroy()
+        try:
+            dialog.destroy()
+        except Exception as e:
+            logging.debug(f"Error destroying dialog: {e}")
         if dialog in self.screen.dialogs:
             logging.info("Removing Dialog")
             self.screen.dialogs.remove(dialog)
+            # Clear confirm reference if this was the confirm dialog
+            if hasattr(self.screen, 'confirm') and self.screen.confirm == dialog:
+                self.screen.confirm = None
             return
         logging.debug(f"Cannot remove dialog {dialog}")
 

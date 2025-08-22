@@ -375,6 +375,14 @@ class KlipperScreen(Gtk.Window):
             # Keep only the most recent messages
             self.popup_queue = self.popup_queue[-max_queue_size:]
         
+        # Don't show popups while dialogs are active to prevent conflicts
+        if self.dialogs or self.confirm is not None:
+            # Just queue the message, don't process it now
+            if self.popup_process_timeout is None:
+                # Delay processing until dialog is closed
+                self.popup_process_timeout = GLib.timeout_add(1000, self._process_popup_queue)
+            return False
+        
         # If we're processing messages too quickly, wait before showing
         min_popup_interval = 0.5  # Minimum 500ms between popups
         if current_time - self.last_popup_time < min_popup_interval:
@@ -395,6 +403,12 @@ class KlipperScreen(Gtk.Window):
             self.popup_process_timeout = None
         
         if not self.popup_queue:
+            return False
+        
+        # Don't process popups while dialogs are active
+        if self.dialogs or self.confirm is not None:
+            # Reschedule for later
+            self.popup_process_timeout = GLib.timeout_add(1000, self._process_popup_queue)
             return False
         
         # Close existing popup first
@@ -529,6 +543,9 @@ class KlipperScreen(Gtk.Window):
 
     def error_modal_response(self, dialog, response_id):
         self.gtk.remove_dialog(dialog)
+        # Process any pending popup messages after dialog is closed
+        if self.popup_queue and not self.dialogs:
+            GLib.timeout_add(100, self._process_popup_queue)
         self.restart_ks()
 
     def restart_ks(self, *args):
@@ -1037,6 +1054,10 @@ class KlipperScreen(Gtk.Window):
 
     def _confirm_send_action_response(self, dialog, response_id, method, params):
         self.gtk.remove_dialog(dialog)
+        # Clear the confirm reference when dialog is closed
+        if self.confirm == dialog:
+            self.confirm = None
+        
         if response_id == Gtk.ResponseType.OK:
             self._send_action(None, method, params)
         if method == "server.files.delete_directory":
@@ -1044,6 +1065,10 @@ class KlipperScreen(Gtk.Window):
             
         if params == {"script": "POWEROFF_RESUME"} and response_id == Gtk.ResponseType.CANCEL:
             self._send_action(None, method, {"script": "REMOVE_POWEROFF_RESUME"})
+        
+        # Process any pending popup messages after dialog is closed
+        if self.popup_queue and not self.dialogs:
+            GLib.timeout_add(100, self._process_popup_queue)
 
     def _send_action(self, widget, method, params):
         logging.info(f"{method}: {params}")
