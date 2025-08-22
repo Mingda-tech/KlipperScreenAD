@@ -2,7 +2,7 @@ import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
 from ks_includes.screen_panel import ScreenPanel
 
 
@@ -24,9 +24,26 @@ class Panel(ScreenPanel):
         pos.attach(self.widgets['zposition'], 0, 1, 2, 1)
         if self.z_offset is not None:
             self.widgets['zoffset'] = Gtk.Label(label="?")
-            pos.attach(Gtk.Label(_("Probe Offset") + ": "), 0, 2, 2, 1)
-            pos.attach(Gtk.Label(_("Saved")), 0, 3, 1, 1)
-            pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
+            
+            probe_label = Gtk.Label(_("Probe Offset") + ": ")
+            probe_label.set_line_wrap(True)
+            probe_label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+            probe_label.set_ellipsize(Pango.EllipsizeMode.END)
+            probe_label.set_max_width_chars(15)
+            
+            saved_label = Gtk.Label(_("Saved"))
+            saved_label.set_line_wrap(True)
+            saved_label.set_ellipsize(Pango.EllipsizeMode.END)
+            saved_label.set_max_width_chars(10)
+            
+            new_label = Gtk.Label(_("New"))
+            new_label.set_line_wrap(True)
+            new_label.set_ellipsize(Pango.EllipsizeMode.END)
+            new_label.set_max_width_chars(10)
+            
+            pos.attach(probe_label, 0, 2, 2, 1)
+            pos.attach(saved_label, 0, 3, 1, 1)
+            pos.attach(new_label, 1, 3, 1, 1)
             pos.attach(Gtk.Label(f"{self.z_offset:.3f}"), 0, 4, 1, 1)
             pos.attach(self.widgets['zoffset'], 1, 4, 1, 1)
         self.buttons = {
@@ -94,6 +111,10 @@ class Panel(ScreenPanel):
             distgrid.attach(self.widgets[i], j, 0, 1, 1)
 
         self.widgets['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
+        self.widgets['move_dist'].set_line_wrap(True)
+        self.widgets['move_dist'].set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        self.widgets['move_dist'].set_ellipsize(Pango.EllipsizeMode.END)
+        self.widgets['move_dist'].set_max_width_chars(20)
         distances = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         distances.pack_start(self.widgets['move_dist'], True, True, 0)
         distances.pack_start(distgrid, True, True, 0)
