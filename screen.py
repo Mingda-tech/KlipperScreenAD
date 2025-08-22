@@ -84,6 +84,9 @@ class KlipperScreen(Gtk.Window):
     keyboard = None
     panels = {}
     popup_message = None
+    popup_queue = []
+    popup_process_timeout = None
+    last_popup_time = 0
     screensaver = None
     printers = printer = None
     updating = False
@@ -359,12 +362,78 @@ class KlipperScreen(Gtk.Window):
         self.process_update("notify_log", log_entry)
 
     def show_popup_message(self, message, level=3):
+        import time
+        current_time = time.time()
+        
+        # Add message to queue
+        self.popup_queue.append((message, level))
+        self.log_notification(message, level)
+        
+        # Limit queue size to prevent memory issues
+        max_queue_size = 10
+        if len(self.popup_queue) > max_queue_size:
+            # Keep only the most recent messages
+            self.popup_queue = self.popup_queue[-max_queue_size:]
+        
+        # If we're processing messages too quickly, wait before showing
+        min_popup_interval = 0.5  # Minimum 500ms between popups
+        if current_time - self.last_popup_time < min_popup_interval:
+            # Schedule processing later if not already scheduled
+            if self.popup_process_timeout is None:
+                self.popup_process_timeout = GLib.timeout_add(500, self._process_popup_queue)
+            return False
+        
+        # Process immediately if enough time has passed
+        self.last_popup_time = current_time
+        self._process_popup_queue()
+        return False
+    
+    def _process_popup_queue(self):
+        import time
+        if self.popup_process_timeout is not None:
+            GLib.source_remove(self.popup_process_timeout)
+            self.popup_process_timeout = None
+        
+        if not self.popup_queue:
+            return False
+        
+        # Close existing popup first
         self.close_screensaver()
         if self.popup_message is not None:
             self.close_popup_message()
-
-        self.log_notification(message, level)
-
+        
+        # If multiple messages in queue, combine them
+        if len(self.popup_queue) > 3:
+            # Too many messages, show summary
+            error_count = sum(1 for _, lvl in self.popup_queue if lvl >= 3)
+            warning_count = sum(1 for _, lvl in self.popup_queue if lvl == 2)
+            info_count = sum(1 for _, lvl in self.popup_queue if lvl <= 1)
+            
+            summary_parts = []
+            if error_count > 0:
+                summary_parts.append(f"{error_count} error(s)")
+            if warning_count > 0:
+                summary_parts.append(f"{warning_count} warning(s)")
+            if info_count > 0:
+                summary_parts.append(f"{info_count} info message(s)")
+            
+            # Show the last error/warning message if any, otherwise last message
+            important_messages = [(msg, lvl) for msg, lvl in self.popup_queue if lvl >= 2]
+            if important_messages:
+                message, level = important_messages[-1]
+                message = f"Multiple messages ({', '.join(summary_parts)}):\n{message}"
+            else:
+                message, level = self.popup_queue[-1]
+                message = f"Multiple messages ({', '.join(summary_parts)}):\n{message}"
+            
+            # Clear the queue after combining
+            self.popup_queue = []
+        else:
+            # Show the first message in queue
+            message, level = self.popup_queue.pop(0)
+        
+        self.last_popup_time = time.time()
+        
         msg = Gtk.Button(label=f"{message}")
         msg.set_hexpand(True)
         msg.set_vexpand(True)
@@ -398,7 +467,11 @@ class KlipperScreen(Gtk.Window):
                 GLib.source_remove(self.popup_timeout)
                 self.popup_timeout = None
             self.popup_timeout = GLib.timeout_add_seconds(10, self.close_popup_message)
-
+        
+        # If there are more messages in queue, schedule next popup
+        if self.popup_queue:
+            self.popup_process_timeout = GLib.timeout_add(1000, self._process_popup_queue)
+        
         return False
 
     def close_popup_message(self, widget=None):
@@ -407,7 +480,16 @@ class KlipperScreen(Gtk.Window):
         self.popup_message.popdown()
         if self.popup_timeout is not None:
             GLib.source_remove(self.popup_timeout)
-        self.popup_message = self.popup_timeout = None
+            self.popup_timeout = None
+        if self.popup_process_timeout is not None:
+            GLib.source_remove(self.popup_process_timeout)
+            self.popup_process_timeout = None
+        self.popup_message = None
+        
+        # Process any remaining messages in queue after a short delay
+        if self.popup_queue:
+            self.popup_process_timeout = GLib.timeout_add(500, self._process_popup_queue)
+        
         return False
 
     def show_error_modal(self, err, e=""):
