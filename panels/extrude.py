@@ -429,7 +429,7 @@ class Panel(ScreenPanel):
 
     def _handle_multi_material_toggle(self, widget, response):
         if widget:
-            widget.destroy()
+            self._gtk.remove_dialog(widget)
             
         if self.multi_material_enabled:
             # 处理禁用多色耗材箱的响应

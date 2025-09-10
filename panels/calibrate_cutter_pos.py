@@ -320,7 +320,7 @@ class Panel(ScreenPanel):
         
         # 关闭对话框
         if widget:
-            widget.destroy()
+            self._gtk.remove_dialog(widget)
 
     def save_config(self):        
         try:
