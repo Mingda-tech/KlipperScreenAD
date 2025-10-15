@@ -159,6 +159,7 @@ class Panel(ScreenPanel):
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
             self._screen._ws.klippy.gcode_script("G28")
         if method == "probe":
+            self._screen._ws.klippy.gcode_script("BED_MESH_CLEAR")
             self._move_to_position()
             self._screen._ws.klippy.gcode_script("PROBE_CALIBRATE")
         elif method == "mesh":
