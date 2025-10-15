@@ -421,11 +421,14 @@ class Panel(ScreenPanel):
 
     def save_confirm(self, dialog, response_id, device):
         self._gtk.remove_dialog(dialog)
+        gcode_macros = self._printer.get_gcode_macros()
         if response_id == Gtk.ResponseType.APPLY:
             if device == "probe":
                 self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_PROBE")
             # if device == "endstop":
-            if "Z_OFFSET_APPLY_ENDSTOP" in self._printer.get_gcode_macros():
+            if "SAVE_BED_MESH_OFFSET" in gcode_macros:
+                self._screen._ws.klippy.gcode_script("SAVE_BED_MESH_OFFSET")
+            elif "Z_OFFSET_APPLY_ENDSTOP" in gcode_macros:
                 self._screen._ws.klippy.gcode_script("Z_OFFSET_APPLY_ENDSTOP")
             # self._screen._ws.klippy.gcode_script("SAVE_CONFIG")
             if self._screen.manual_settings is not None and 'extruder1' in self._screen.manual_settings:
